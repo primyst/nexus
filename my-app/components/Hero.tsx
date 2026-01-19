@@ -1,68 +1,62 @@
-'use client';
-
-import { ArrowRight } from 'lucide-react';
+import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 
-export default function Hero() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
+const Hero: React.FC = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 px-6 bg-white overflow-hidden">
-      <div className="max-w-6xl mx-auto w-full">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className={`space-y-8 ${isLoaded ? 'animate-slide-in-left' : 'opacity-0'}`}>
-            <div className="space-y-6">
-              <p className="text-blue-900 font-semibold text-sm tracking-widest uppercase">
-                Financial Excellence
-              </p>
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight text-gray-900">
-                Wealth Management for the Future
-              </h1>
-              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-                Strategic financial planning and investment management tailored to your unique goals. We combine market expertise with personalized service to build lasting wealth.
-              </p>
-            </div>
+    <section className="relative overflow-hidden">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-28">
+        {/* Text content */}
+        <div>
+          <p className="mb-4 text-sm font-medium uppercase tracking-wide text-slate-500">
+            Financial & Corporate Services
+          </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link
-                href="/services"
-                className="px-8 py-4 bg-blue-900 text-white rounded font-semibold hover:bg-blue-950 transition-smooth inline-flex items-center justify-center gap-2"
-              >
-                Explore Services
-                <ArrowRight size={20} />
-              </Link>
-              <Link
-                href="/contact"
-                className="px-8 py-4 border-2 border-gray-300 text-gray-900 rounded font-semibold hover:border-gray-400 hover:bg-gray-50 transition-smooth"
-              >
-                Schedule Meeting
-              </Link>
-            </div>
-          </div>
+          <h1 className="mb-6 text-4xl font-semibold leading-tight tracking-tight text-[var(--foreground)] sm:text-5xl">
+            Building trust through
+            <br />
+            strategy, structure, and execution
+          </h1>
 
-          <div className={`relative h-96 md:h-full ${isLoaded ? 'animate-slide-in-right' : 'opacity-0'}`}>
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-gray-50 rounded-2xl"></div>
-            <div className="absolute inset-6 bg-white rounded-xl shadow-lg flex items-center justify-center border border-gray-200">
-              <div className="text-center space-y-6 p-8">
-                <div className="space-y-2">
-                  <p className="text-5xl font-bold text-gray-900">$2.4B</p>
-                  <p className="text-gray-600 font-medium">Assets Under Management</p>
-                </div>
-                <div className="h-px bg-gray-200"></div>
-                <div className="space-y-2">
-                  <p className="text-3xl font-bold text-gray-900">500+</p>
-                  <p className="text-gray-600 font-medium">Client Partnerships</p>
-                </div>
-              </div>
-            </div>
+          <p className="mb-8 max-w-xl text-base leading-relaxed text-slate-600">
+            Nexus Corporate partners with businesses and institutions to deliver
+            clear financial guidance, operational insight, and long-term value.
+            Every engagement is driven by accuracy, discretion, and measurable
+            outcomes.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-md bg-slate-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
+            >
+              Start a Conversation
+              <ArrowRight size={16} />
+            </Link>
+
+            <Link
+              href="/services"
+              className="text-sm font-medium text-slate-700 transition hover:text-slate-900"
+            >
+              View Services
+            </Link>
           </div>
+        </div>
+
+        {/* Image */}
+        <div className="relative h-[420px] w-full overflow-hidden rounded-lg">
+          <Image
+            src="/images/project-1.jpg"
+            alt="Corporate financial discussion"
+            fill
+            priority
+            className="object-cover"
+          />
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

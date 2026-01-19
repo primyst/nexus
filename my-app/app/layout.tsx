@@ -4,15 +4,10 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Nexus Design Co. - Creative Design & Digital Solutions',
-  description: 'Award-winning design agency specializing in branding, web design, and digital experiences.',
-  keywords: 'design agency, branding, web design, creative services, digital solutions',
-  authors: [{ name: 'Nexus Design Co.' }],
-  openGraph: {
-    title: 'Nexus Design Co.',
-    description: 'Creative Design & Digital Solutions',
-    type: 'website',
-  },
+  title: 'Nexus Financial Services - Wealth Management & Investment Solutions',
+  description: 'Leading financial advisory firm providing comprehensive wealth management, investment strategies, and financial planning services for high-net-worth individuals and institutions.',
+  keywords: 'wealth management, financial advisory, investment management, financial planning, portfolio management',
+  authors: [{ name: 'Nexus Financial Services' }],
 };
 
 export default function RootLayout({

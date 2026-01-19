@@ -1,27 +1,35 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Nexus Financial Services - Wealth Management & Investment Solutions',
-  description: 'Leading financial advisory firm providing comprehensive wealth management, investment strategies, and financial planning services for high-net-worth individuals and institutions.',
-  keywords: 'wealth management, financial advisory, investment management, financial planning, portfolio management',
-  authors: [{ name: 'Nexus Financial Services' }],
+  title: {
+    default: 'Nexus Corporate',
+    template: '%s | Nexus Corporate',
+  },
+  description:
+    'Nexus Corporate is a professional financial services firm providing advisory, consulting, and strategic solutions.',
+  metadataBase: new URL('https://nexus-corporate.vercel.app'),
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+interface RootLayoutProps {
+  readonly children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
-    <html lang="en">
-      <body className="bg-white text-gray-900">
+    <html lang="en" className={inter.variable}>
+      <body className="bg-white text-slate-900 antialiased">
         <Navigation />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>

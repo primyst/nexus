@@ -17,34 +17,22 @@ const navItems: NavItem[] = [
 ];
 
 const Navigation: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const toggleMenu = (): void => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const closeMenu = (): void => {
-    setIsOpen(false);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]">
+    <header className="sticky top-0 z-50 border-b border-[#E2E8F0] bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* Brand */}
-        <Link
-          href="/"
-          className="text-lg font-semibold tracking-tight text-[var(--foreground)]"
-        >
-          Nexus<span className="text-[var(--primary)]">Corporate</span>
+        <Link href="/" className="text-lg font-semibold text-[#0F2A44]">
+          Nexus<span className="text-[#1E6F5C]">Corporate</span>
         </Link>
 
-        {/* Desktop navigation */}
-        <ul className="hidden items-center gap-8 md:flex">
+        {/* Desktop */}
+        <ul className="hidden md:flex gap-8 items-center">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
+                className="text-sm font-medium text-[#5B6B7C] hover:text-[#0F2A44] transition-colors"
               >
                 {item.label}
               </Link>
@@ -52,27 +40,26 @@ const Navigation: React.FC = () => {
           ))}
         </ul>
 
-        {/* Mobile toggle */}
+        {/* Mobile */}
         <button
           type="button"
-          onClick={toggleMenu}
-          aria-label="Toggle navigation menu"
-          className="inline-flex items-center justify-center rounded-md p-2 text-[var(--foreground)] md:hidden"
+          onClick={() => setOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+          className="md:hidden text-[#0F2A44]"
         >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
-      {/* Mobile menu */}
-      {isOpen && (
-        <div className="md:hidden">
-          <ul className="space-y-1 border-t border-[var(--border)] bg-[var(--background)] px-4 py-4">
+      {open && (
+        <div className="md:hidden border-t border-[#E2E8F0] bg-white">
+          <ul className="space-y-2 px-4 py-4">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={closeMenu}
-                  className="block rounded-md px-3 py-2 text-sm font-medium text-[var(--muted)] transition-colors hover:bg-[var(--border)] hover:text-[var(--foreground)]"
+                  onClick={() => setOpen(false)}
+                  className="block text-base font-medium text-[#5B6B7C] hover:text-[#0F2A44] transition-colors"
                 >
                   {item.label}
                 </Link>

@@ -33,8 +33,6 @@ const HomePage: React.FC = () => {
       {/* Contact Form */}
       <ContactForm />
 
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

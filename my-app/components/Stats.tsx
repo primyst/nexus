@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 
 const stats = [
-  { number: '150+', label: 'Projects Completed' },
-  { number: '98%', label: 'Client Satisfaction' },
-  { number: '50+', label: 'Team Members' },
-  { number: '12', label: 'Years of Excellence' },
+  { number: '25+', label: 'Years of Industry Experience' },
+  { number: '500+', label: 'Active Client Relationships' },
+  { number: '$2.4B', label: 'Assets Under Management' },
+  { number: '98%', label: 'Client Retention Rate' },
 ];
 
 export default function Stats() {
@@ -17,9 +17,9 @@ export default function Stats() {
   }, []);
 
   return (
-    <section className="py-20 px-6 bg-gray-50">
+    <section className="py-24 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-4 gap-12">
           {stats.map((stat, index) => (
             <div
               key={index}
@@ -28,7 +28,7 @@ export default function Stats() {
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="text-4xl md:text-5xl font-bold accent-text mb-2">
+              <div className="text-4xl md:text-5xl font-bold text-blue-900 mb-2">
                 {stat.number}
               </div>
               <p className="text-gray-600 font-medium">{stat.label}</p>

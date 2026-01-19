@@ -1,41 +1,36 @@
-'use client';
+import React from 'react';
 
-import { useEffect, useState } from 'react';
+interface StatItem {
+  value: string;
+  label: string;
+}
 
-const stats = [
-  { number: '25+', label: 'Years of Industry Experience' },
-  { number: '500+', label: 'Active Client Relationships' },
-  { number: '$2.4B', label: 'Assets Under Management' },
-  { number: '98%', label: 'Client Retention Rate' },
+const stats: StatItem[] = [
+  { value: '10+', label: 'Years of Industry Experience' },
+  { value: '120+', label: 'Client Engagements Completed' },
+  { value: '95%', label: 'Client Retention Rate' },
+  { value: '15+', label: 'Industry Partners Worldwide' },
 ];
 
-export default function Stats() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
+const Stats: React.FC = () => {
   return (
-    <section className="py-24 px-6 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-12">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className={`text-center stagger-item ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="text-4xl md:text-5xl font-bold text-blue-900 mb-2">
-                {stat.number}
-              </div>
-              <p className="text-gray-600 font-medium">{stat.label}</p>
+    <section className="border-y border-slate-200 bg-slate-50">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p className="mb-2 text-3xl font-semibold tracking-tight text-slate-900">
+                {stat.value}
+              </p>
+              <p className="text-sm text-slate-600">
+                {stat.label}
+              </p>
             </div>
           ))}
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Stats;

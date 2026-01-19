@@ -14,48 +14,50 @@ export default function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 px-6 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto w-full">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className={`space-y-8 ${isLoaded ? 'animate-slide-in-left' : 'opacity-0'}`}>
-            <div className="space-y-4">
-              <p className="text-amber-600 font-semibold text-sm tracking-widest uppercase">
-                Welcome to Nexus
+            <div className="space-y-6">
+              <p className="text-blue-900 font-semibold text-sm tracking-widest uppercase">
+                Financial Excellence
               </p>
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Design That
-                <span className="block accent-text">Transforms</span>
+              <h1 className="text-5xl md:text-6xl font-bold leading-tight text-gray-900">
+                Wealth Management for the Future
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                We create bold, innovative digital experiences that elevate brands and drive meaningful results. From concept to execution, we deliver excellence.
+              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
+                Strategic financial planning and investment management tailored to your unique goals. We combine market expertise with personalized service to build lasting wealth.
               </p>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link
-                href="/work"
-                className="px-8 py-4 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-smooth inline-flex items-center justify-center gap-2"
+                href="/services"
+                className="px-8 py-4 bg-blue-900 text-white rounded font-semibold hover:bg-blue-950 transition-smooth inline-flex items-center justify-center gap-2"
               >
-                View Our Work
+                Explore Services
                 <ArrowRight size={20} />
               </Link>
               <Link
                 href="/contact"
-                className="px-8 py-4 border-2 border-gray-300 text-gray-900 rounded-lg font-semibold hover:border-gray-400 hover:bg-gray-50 transition-smooth"
+                className="px-8 py-4 border-2 border-gray-300 text-gray-900 rounded font-semibold hover:border-gray-400 hover:bg-gray-50 transition-smooth"
               >
-                Start a Project
+                Schedule Meeting
               </Link>
             </div>
           </div>
 
-          {/* Right Visual */}
           <div className={`relative h-96 md:h-full ${isLoaded ? 'animate-slide-in-right' : 'opacity-0'}`}>
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-100 to-orange-50 rounded-3xl opacity-40"></div>
-            <div className="absolute inset-4 bg-gradient-to-tr from-amber-50 to-white rounded-2xl opacity-60"></div>
-            <div className="absolute inset-8 bg-white rounded-xl shadow-2xl flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full mx-auto"></div>
-                <p className="text-gray-600 font-medium">Creative Excellence</p>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-gray-50 rounded-2xl"></div>
+            <div className="absolute inset-6 bg-white rounded-xl shadow-lg flex items-center justify-center border border-gray-200">
+              <div className="text-center space-y-6 p-8">
+                <div className="space-y-2">
+                  <p className="text-5xl font-bold text-gray-900">$2.4B</p>
+                  <p className="text-gray-600 font-medium">Assets Under Management</p>
+                </div>
+                <div className="h-px bg-gray-200"></div>
+                <div className="space-y-2">
+                  <p className="text-3xl font-bold text-gray-900">500+</p>
+                  <p className="text-gray-600 font-medium">Client Partnerships</p>
+                </div>
               </div>
             </div>
           </div>

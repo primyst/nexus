@@ -1,20 +1,23 @@
+import type { Metadata } from 'next';
 import './globals.css';
-import { ReactNode } from 'react';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Nexus Corporate',
-  description: 'Enterprise consulting & digital innovation'
+  description:
+    'Nexus Corporate delivers reliable solutions for complex business challenges.',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>
-        <Navigation />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+      <body className="bg-black text-white antialiased">
+        <Navbar />
+        <main>{children}</main>
       </body>
     </html>
   );

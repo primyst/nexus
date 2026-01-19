@@ -1,70 +1,55 @@
-'use client';
+import React from 'react';
 
-import { Star } from 'lucide-react';
-import { useEffect, useState } from 'react';
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+}
 
-const testimonials = [
+const testimonials: Testimonial[] = [
   {
-    name: 'Robert Mitchell',
-    role: 'CEO, Mitchell Industries',
-    content: 'Nexus has been instrumental in growing and protecting our family wealth. Their strategic approach and personalized service are unmatched.',
-    rating: 5,
+    quote:
+      'Nexus Corporate transformed our financial planning process — their insights are unmatched.',
+    name: 'Jane Smith',
+    role: 'CFO, GlobalTech Inc.',
   },
   {
-    name: 'Jennifer Walsh',
-    role: 'Executive Director, Walsh Foundation',
-    content: 'Professional, knowledgeable, and genuinely invested in our success. They understand our complex financial needs better than anyone.',
-    rating: 5,
+    quote:
+      'Professional, reliable, and highly strategic. They helped us navigate complex compliance challenges.',
+    name: 'Michael Johnson',
+    role: 'CEO, FinSolutions Ltd.',
   },
   {
-    name: 'David Chen',
-    role: 'Founder, Chen Technology Group',
-    content: 'The team at Nexus combines deep market expertise with exceptional client service. Highly recommended for serious investors.',
-    rating: 5,
+    quote:
+      'Their team delivered exactly what we needed, on time and with exceptional quality.',
+    name: 'Sarah Lee',
+    role: 'COO, Enterprise Advisory Group',
   },
 ];
 
-export default function Testimonials() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
+const Testimonials: React.FC = () => {
   return (
-    <section className="py-24 px-6 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16 space-y-4">
-          <p className="text-blue-900 font-semibold text-sm tracking-widest uppercase">
-            Client Testimonials
+    <section className="py-20 bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-3xl font-semibold text-[#0F2A44] sm:text-4xl">Client Testimonials</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-[#5B6B7C]">
+            Hear what our clients and partners have to say about working with Nexus Corporate.
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-            Trusted by Leading Families and Institutions
-          </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+        {/* Testimonials Grid */}
+        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3">
+          {testimonials.map((testimonial, idx) => (
             <div
-              key={index}
-              className={`stagger-item p-8 rounded-lg bg-white border border-gray-200 hover-lift ${
-                isVisible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              key={idx}
+              className="flex flex-col justify-between rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-6 animate-fade-in transition hover:shadow-lg"
             >
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-blue-900 text-blue-900" />
-                ))}
-              </div>
-
-              <p className="text-gray-700 mb-6 leading-relaxed italic">
-                "{testimonial.content}"
-              </p>
-
+              <p className="mb-4 text-[#0F2A44] italic">"{testimonial.quote}"</p>
               <div>
-                <p className="font-bold text-gray-900">{testimonial.name}</p>
-                <p className="text-sm text-gray-600">{testimonial.role}</p>
+                <p className="font-semibold text-[#0F2A44]">{testimonial.name}</p>
+                <p className="text-[#5B6B7C] text-sm">{testimonial.role}</p>
               </div>
             </div>
           ))}
@@ -72,4 +57,6 @@ export default function Testimonials() {
       </div>
     </section>
   );
-}
+};
+
+export default Testimonials;

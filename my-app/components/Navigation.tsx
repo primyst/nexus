@@ -20,7 +20,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold tracking-tight">
-          <span className="gradient-text">Nexus</span>
+          Nexus<span className="accent-text">.</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -39,7 +39,7 @@ export default function Navigation() {
         {/* CTA Button */}
         <Link
           href="/contact"
-          className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-medium text-sm hover:shadow-lg transition-smooth"
+          className="hidden md:block px-6 py-2.5 bg-amber-600 text-white rounded-lg font-medium text-sm hover:bg-amber-700 transition-smooth"
         >
           Get Started
         </Link>
@@ -69,7 +69,7 @@ export default function Navigation() {
             ))}
             <Link
               href="/contact"
-              className="block w-full px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-medium text-center"
+              className="block w-full px-6 py-2.5 bg-amber-600 text-white rounded-lg font-medium text-center"
               onClick={() => setIsOpen(false)}
             >
               Get Started

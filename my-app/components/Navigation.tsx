@@ -1,77 +1,88 @@
 'use client';
 
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
+interface NavItem {
+  label: string;
+  href: string;
+}
 
-  const navItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Insights', href: '/insights' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
-  ];
+const navItems: NavItem[] = [
+  { label: 'Services', href: '/services' },
+  { label: 'Work', href: '/work' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const Navigation: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleMenu = (): void => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const closeMenu = (): void => {
+    setIsOpen(false);
+  };
 
   return (
-    <nav className="fixed w-full bg-white/98 backdrop-blur-sm z-50 border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold tracking-tight text-gray-900">
-          Nexus
-        </Link>
-
-        <div className="hidden md:flex gap-10">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-gray-700 hover:text-gray-900 transition-smooth font-medium text-sm"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-
+    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        {/* Brand */}
         <Link
-          href="/contact"
-          className="hidden md:block px-6 py-2.5 bg-blue-900 text-white rounded font-medium text-sm hover:bg-blue-950 transition-smooth"
+          href="/"
+          className="text-lg font-semibold tracking-tight text-[var(--foreground)]"
         >
-          Schedule Consultation
+          Nexus<span className="text-[var(--primary)]">Corporate</span>
         </Link>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
-          <div className="px-6 py-4 space-y-4">
-            {navItems.map((item) => (
+        {/* Desktop navigation */}
+        <ul className="hidden items-center gap-8 md:flex">
+          {navItems.map((item) => (
+            <li key={item.href}>
               <Link
-                key={item.href}
                 href={item.href}
-                className="block text-gray-700 hover:text-gray-900 font-medium"
-                onClick={() => setIsOpen(false)}
+                className="text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
               >
                 {item.label}
               </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          onClick={toggleMenu}
+          aria-label="Toggle navigation menu"
+          className="inline-flex items-center justify-center rounded-md p-2 text-[var(--foreground)] md:hidden"
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden">
+          <ul className="space-y-1 border-t border-[var(--border)] bg-[var(--background)] px-4 py-4">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={closeMenu}
+                  className="block rounded-md px-3 py-2 text-sm font-medium text-[var(--muted)] transition-colors hover:bg-[var(--border)] hover:text-[var(--foreground)]"
+                >
+                  {item.label}
+                </Link>
+              </li>
             ))}
-            <Link
-              href="/contact"
-              className="block w-full px-6 py-2.5 bg-blue-900 text-white rounded font-medium text-center"
-              onClick={() => setIsOpen(false)}
-            >
-              Schedule Consultation
-            </Link>
-          </div>
+          </ul>
         </div>
       )}
-    </nav>
+    </header>
   );
-}
+};
+
+export default Navigation;

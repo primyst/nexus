@@ -1,74 +1,62 @@
-'use client';
+import React from 'react';
+import { Briefcase, BarChart, Shield } from 'lucide-react';
 
-import { TrendingUp, Shield, BarChart3, Target } from 'lucide-react';
-import { useEffect, useState } from 'react';
+interface ServiceItem {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+}
 
-const services = [
+const services: ServiceItem[] = [
   {
-    icon: TrendingUp,
-    title: 'Wealth Management',
-    description: 'Comprehensive portfolio management and investment strategies designed for long-term growth and wealth preservation.',
+    title: 'Corporate Advisory',
+    description:
+      'Strategic guidance for businesses seeking financial clarity and sustainable growth.',
+    icon: <Briefcase size={24} />,
   },
   {
-    icon: Shield,
-    title: 'Risk Management',
-    description: 'Strategic risk assessment and mitigation to protect your assets and ensure financial stability.',
+    title: 'Financial Planning & Analysis',
+    description:
+      'Comprehensive analytics to help organizations make informed investment and operational decisions.',
+    icon: <BarChart size={24} />,
   },
   {
-    icon: BarChart3,
-    title: 'Financial Planning',
-    description: 'Personalized financial plans aligned with your life goals, retirement objectives, and family needs.',
-  },
-  {
-    icon: Target,
-    title: 'Investment Advisory',
-    description: 'Expert guidance on investment opportunities, asset allocation, and portfolio optimization.',
+    title: 'Risk & Compliance',
+    description:
+      'Identifying and mitigating risks while ensuring compliance with industry regulations.',
+    icon: <Shield size={24} />,
   },
 ];
 
-export default function Services() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
+const Services: React.FC = () => {
   return (
-    <section className="py-24 px-6 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16 space-y-4">
-          <p className="text-blue-900 font-semibold text-sm tracking-widest uppercase">
-            Our Services
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-            Comprehensive Financial Solutions
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Tailored services designed to address your unique financial needs and objectives.
-          </p>
-        </div>
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">
+          Our Services
+        </h2>
+        <p className="mt-4 max-w-2xl mx-auto text-slate-600">
+          Nexus Corporate provides expert solutions tailored to the unique needs of
+          each client.
+        </p>
+      </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            return (
-              <div
-                key={index}
-                className={`stagger-item p-8 rounded-lg border border-gray-200 hover-lift bg-white ${
-                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="w-12 h-12 bg-blue-900 rounded flex items-center justify-center mb-6">
-                  <Icon size={24} className="text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{service.description}</p>
-              </div>
-            );
-          })}
-        </div>
+      <div className="grid gap-10 md:grid-cols-3">
+        {services.map((service) => (
+          <div
+            key={service.title}
+            className="flex flex-col items-start gap-4 rounded-lg border border-[var(--border)] bg-[var(--background)] p-6 transition hover:shadow-lg"
+          >
+            <div className="mb-2 text-[var(--primary)]">{service.icon}</div>
+            <h3 className="text-xl font-semibold text-[var(--foreground)]">
+              {service.title}
+            </h3>
+            <p className="text-slate-600">{service.description}</p>
+          </div>
+        ))}
       </div>
     </section>
   );
-}
+};
+
+export default Services;

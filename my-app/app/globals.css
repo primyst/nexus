@@ -3,11 +3,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary-color: #0f2a44;
-  --secondary-color: #1e6f5c;
-  --accent-color: #c9a227;
-  --muted-color: #5b6b7c;
-  --border-color: #e2e8f0;
 }
 
 @theme inline {
@@ -45,4 +40,12 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-charcoal font-sans;
 }

@@ -1,26 +1,26 @@
-'use client';
-
+import React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
-export default function CTA() {
+const CTA: React.FC = () => {
   return (
-    <section className="py-24 px-6 bg-blue-900 text-white">
-      <div className="max-w-4xl mx-auto text-center space-y-8">
-        <h2 className="text-4xl md:text-5xl font-bold">
-          Ready to Grow Your Wealth?
+    <section className="bg-[#0F2A44] py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center animate-fade-in">
+        <h2 className="text-3xl font-semibold text-white sm:text-4xl mb-4">
+          Ready to Elevate Your Enterprise?
         </h2>
-        <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-          Schedule a consultation with our financial advisors to discuss your goals and develop a customized strategy.
+        <p className="text-[#C9A227] mb-6 max-w-2xl mx-auto">
+          Partner with Nexus Corporate to streamline operations, optimize finances, and drive measurable growth.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-900 rounded font-semibold hover:bg-gray-100 transition-smooth"
+          className="inline-flex items-center gap-2 bg-[#C9A227] text-[#0F2A44] px-6 py-3 rounded-md font-medium transition hover:bg-[#1E6F5C] hover:text-white"
         >
-          Schedule Your Consultation
-          <ArrowRight size={20} />
+          Contact Us <ArrowRight size={16} />
         </Link>
       </div>
     </section>
   );
-}
+};
+
+export default CTA;

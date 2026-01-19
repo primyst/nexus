@@ -1,40 +1,17 @@
-import React from 'react';
-import Hero from '../components/Hero';
-import Stats from '../components/Stats';
-import Services from '../components/Services';
-import Portfolio from '../components/Portfolio';
-import Testimonials from '../components/Testimonials';
-import CTA from '../components/CTA';
-import ContactForm from '../components/ContactForm';
-import Footer from '../components/Footer';
+import Hero from '@/components/Hero';
+import Services from '@/components/Services';
+import Work from '@/components/Work';
+import About from '@/components/About';
+import Contact from '@/components/Contact';
 
-const HomePage: React.FC = () => {
+export default function HomePage() {
   return (
-    <div className="font-sans text-[#171717] bg-white">
-
-      {/* Hero */}
+    <>
       <Hero />
-
-      {/* Stats */}
-      <Stats />
-
-      {/* Services */}
       <Services />
-
-      {/* Portfolio / Work */}
-      <Portfolio />
-
-      {/* Testimonials */}
-      <Testimonials />
-
-      {/* CTA */}
-      <CTA />
-
-      {/* Contact Form */}
-      <ContactForm />
-
-    </div>
+      <Work />
+      <About />
+      <Contact />
+    </>
   );
-};
-
-export default HomePage;
+}

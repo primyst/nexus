@@ -1,5 +1,4 @@
 import React from 'react';
-import Navigation from '../components/Navigation';
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
 import Services from '../components/Services';
@@ -12,8 +11,6 @@ import Footer from '../components/Footer';
 const HomePage: React.FC = () => {
   return (
     <div className="font-sans text-[#171717] bg-white">
-      {/* Navigation */}
-      <Navigation />
 
       {/* Hero */}
       <Hero />

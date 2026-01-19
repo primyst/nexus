@@ -1,19 +1,45 @@
-import Hero from '@/components/Hero';
-import Services from '@/components/Services';
-import Stats from '@/components/Stats';
-import Insights from '@/components/Insights';
-import Testimonials from '@/components/Testimonials';
-import CTA from '@/components/CTA';
+import React from 'react';
+import Navigation from '../components/Navigation';
+import Hero from '../components/Hero';
+import Stats from '../components/Stats';
+import Services from '../components/Services';
+import Portfolio from '../components/Portfolio';
+import Testimonials from '../components/Testimonials';
+import CTA from '../components/CTA';
+import ContactForm from '../components/ContactForm';
+import Footer from '../components/Footer';
 
-export default function Home() {
+const HomePage: React.FC = () => {
   return (
-    <>
+    <div className="font-sans text-[#171717] bg-white">
+      {/* Navigation */}
+      <Navigation />
+
+      {/* Hero */}
       <Hero />
-      <Services />
+
+      {/* Stats */}
       <Stats />
-      <Insights />
+
+      {/* Services */}
+      <Services />
+
+      {/* Portfolio / Work */}
+      <Portfolio />
+
+      {/* Testimonials */}
       <Testimonials />
+
+      {/* CTA */}
       <CTA />
-    </>
+
+      {/* Contact Form */}
+      <ContactForm />
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
-}
+};
+
+export default HomePage;

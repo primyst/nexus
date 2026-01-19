@@ -10,21 +10,19 @@ export default function Navigation() {
   const navItems = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
-    { label: 'Work', href: '/work' },
+    { label: 'Insights', href: '/insights' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ];
 
   return (
-    <nav className="fixed w-full bg-white/95 backdrop-blur-md z-50 border-b border-gray-100">
+    <nav className="fixed w-full bg-white/98 backdrop-blur-sm z-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-bold tracking-tight">
-          Nexus<span className="accent-text">.</span>
+        <Link href="/" className="text-2xl font-bold tracking-tight text-gray-900">
+          Nexus
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex gap-10">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -36,15 +34,13 @@ export default function Navigation() {
           ))}
         </div>
 
-        {/* CTA Button */}
         <Link
           href="/contact"
-          className="hidden md:block px-6 py-2.5 bg-amber-600 text-white rounded-lg font-medium text-sm hover:bg-amber-700 transition-smooth"
+          className="hidden md:block px-6 py-2.5 bg-blue-900 text-white rounded font-medium text-sm hover:bg-blue-950 transition-smooth"
         >
-          Get Started
+          Schedule Consultation
         </Link>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden p-2"
@@ -53,9 +49,8 @@ export default function Navigation() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100">
+        <div className="md:hidden bg-white border-t border-gray-200">
           <div className="px-6 py-4 space-y-4">
             {navItems.map((item) => (
               <Link
@@ -69,10 +64,10 @@ export default function Navigation() {
             ))}
             <Link
               href="/contact"
-              className="block w-full px-6 py-2.5 bg-amber-600 text-white rounded-lg font-medium text-center"
+              className="block w-full px-6 py-2.5 bg-blue-900 text-white rounded font-medium text-center"
               onClick={() => setIsOpen(false)}
             >
-              Get Started
+              Schedule Consultation
             </Link>
           </div>
         </div>

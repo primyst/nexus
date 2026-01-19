@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 * {
   margin: 0;
@@ -19,7 +19,6 @@ body {
   line-height: 1.6;
 }
 
-/* Smooth scroll reveal animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -53,17 +52,6 @@ body {
   }
 }
 
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
@@ -76,11 +64,6 @@ body {
   animation: slideInRight 0.8s ease-out forwards;
 }
 
-.animate-scale-in {
-  animation: scaleIn 0.6s ease-out forwards;
-}
-
-/* Stagger effect for list items */
 .stagger-item {
   animation: fadeInUp 0.8s ease-out forwards;
 }
@@ -92,55 +75,15 @@ body {
 .stagger-item:nth-child(5) { animation-delay: 0.5s; }
 .stagger-item:nth-child(6) { animation-delay: 0.6s; }
 
-/* Smooth transitions */
 .transition-smooth {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hover lift effect */
 .hover-lift {
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
 
 .hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
-
-/* Accent text */
-.accent-text {
-  color: #d97706;
-}
-
-/* Accent underline */
-.accent-underline {
-  position: relative;
-  display: inline-block;
-}
-
-.accent-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #d97706;
-  border-radius: 2px;
-}
-
-/* Subtle border animation */
-@keyframes borderGlow {
-  0%, 100% {
-    border-color: rgba(217, 119, 6, 0.2);
-    box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.1);
-  }
-  50% {
-    border-color: rgba(217, 119, 6, 0.4);
-    box-shadow: 0 0 15px rgba(217, 119, 6, 0.15);
-  }
-}
-
-.border-glow {
-  animation: borderGlow 3s ease-in-out infinite;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
 }

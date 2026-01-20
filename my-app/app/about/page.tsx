@@ -85,7 +85,7 @@ export default function AboutPage() {
             {/* Right - Image */}
             <div className="relative h-96 md:h-full rounded-lg overflow-hidden shadow-2xl animate-fade-in-right" style={{ animationDelay: '0.1s' }}>
               <Image
-                src="/images/about-office.jpg"
+                src="/about-office.jpg"
                 alt="Nexus Corporate office"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-500"

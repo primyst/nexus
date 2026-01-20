@@ -44,7 +44,8 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-black/90 flex flex-col items-center gap-4 py-6 md:hidden">
+        <div className="absolute top-full left-0 w-full bg-black/90 flex flex-col items-center gap-4 py-6 md:hidden text-white">
+          <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
           <Link href="/services" onClick={() => setIsOpen(false)}>Services</Link>
           <Link href="/work" onClick={() => setIsOpen(false)}>Work</Link>
           <Link href="/about" onClick={() => setIsOpen(false)}>About</Link>

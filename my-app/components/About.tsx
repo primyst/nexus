@@ -8,7 +8,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-4 font-serif animate-slide-down">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif animate-slide-down">
             About Nexus Corporate
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
@@ -29,7 +29,7 @@ export default function About() {
             </p>
 
             <Link href="/about">
-              <button className="bg-gold text-navy px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                 Learn More About Us
               </button>
             </Link>
@@ -51,11 +51,11 @@ export default function About() {
 function StatBox({ icon, value, label, delay }: { icon: React.ReactNode; value: string; label: string; delay: number }) {
   return (
     <div 
-      className="bg-cream rounded-xl p-6 border border-gold/20 hover:border-gold/60 transition-all duration-300 transform hover:scale-105 hover:shadow-lg animate-scale-in"
+      className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 hover:shadow-lg animate-scale-in"
       style={{ animationDelay: `${delay}s` }}
     >
-      <div className="text-gold mb-3 transform group-hover:scale-110 transition-transform duration-300">{icon}</div>
-      <div className="text-3xl font-bold text-navy font-serif mb-1">{value}</div>
+      <div className="text-blue-600 mb-3 flex justify-center">{icon}</div>
+      <div className="text-3xl font-bold text-slate-900 mb-1 font-serif">{value}</div>
       <div className="text-sm text-slate-600">{label}</div>
     </div>
   );

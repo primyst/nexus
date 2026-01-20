@@ -8,10 +8,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        gold: '#D4AF37',
-        navy: '#1A2B4A',
-        teal: '#0D9488',
-        cream: '#F5F3F0',
+        'brand-blue': '#0F3B66',
+        'brand-accent': '#E8A500',
+        'brand-light': '#F8FAFB',
+        'brand-dark': '#1A1F2E',
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
       },
     },
   },

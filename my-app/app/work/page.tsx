@@ -1,201 +1,200 @@
 'use client';
-import { CheckCircle } from 'lucide-react';
+import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowRight, TrendingUp } from 'lucide-react';
 
-const caseStudies = [
+interface CaseStudy {
+  id: number;
+  title: string;
+  client: string;
+  industry: string;
+  image: string;
+  challenge: string;
+  solution: string;
+  results: {
+    metric: string;
+    value: string;
+  }[];
+  slug: string;
+}
+
+const caseStudies: CaseStudy[] = [
   {
     id: 1,
-    title: 'GlobalBank Digital Transformation',
-    client: 'GlobalBank Solutions',
-    industry: 'Financial Services',
-    duration: '18 months',
-    teamSize: 12,
-    challenge:
-      'Legacy systems causing operational bottlenecks, slow customer onboarding (30+ days), high manual processing costs.',
-    solution:
-      'Cloud migration, API integration, process automation, comprehensive staff training.',
+    title: 'Supply Chain Transformation',
+    client: 'Global Manufacturing Corp',
+    industry: 'Manufacturing',
+    image: '/images/case-study-1-hero.jpg',
+    challenge: 'Complex multi-region supply chain with 40% excess inventory and high logistics costs',
+    solution: 'Implemented demand-driven planning, vendor consolidation, and network optimization',
     results: [
-      'Onboarding time: 30 days → 3 days',
-      'Operational costs reduced by 50%',
-      'System uptime: 99.9%',
-      'Customer satisfaction: +45%',
+      { metric: 'Inventory Reduction', value: '35%' },
+      { metric: 'Cost Savings', value: '$45M annually' },
+      { metric: 'On-time Delivery', value: '98%' },
+      { metric: 'Implementation Time', value: '8 months' },
     ],
+    slug: 'global-manufacturing-supply-chain',
   },
   {
     id: 2,
-    title: 'CloudSync Strategic Restructuring',
-    client: 'CloudSync Technologies',
-    industry: 'Technology/SaaS',
-    duration: '9 months',
-    teamSize: 6,
-    challenge:
-      'Rapid growth causing organizational chaos, unclear roles, inefficient processes.',
-    solution:
-      'Organizational restructuring, process mapping, leadership coaching, change management.',
+    title: 'Finance Shared Services Center',
+    client: 'Fortune 500 Financial Services',
+    industry: 'Finance',
+    image: '/images/case-study-2-hero.jpg',
+    challenge: 'Fragmented finance operations across 12 locations with high processing costs',
+    solution: 'Established shared services center with RPA and process automation',
     results: [
-      'Productivity: +35%',
-      'Employee satisfaction: +52%',
-      'Time-to-market: -40%',
-      'Scaled from 50 to 150 employees',
+      { metric: 'Cost Reduction', value: '38%' },
+      { metric: 'Processing Time', value: '60% faster' },
+      { metric: 'FTE Optimization', value: '200 roles' },
+      { metric: 'Error Rate', value: '99.2% accuracy' },
     ],
+    slug: 'fortune-500-finance-transformation',
   },
   {
     id: 3,
-    title: 'HealthFirst ERP Implementation',
-    client: 'HealthFirst Systems',
+    title: 'Operational Excellence Program',
+    client: 'Healthcare Provider Network',
     industry: 'Healthcare',
-    duration: '14 months',
-    teamSize: 10,
-    challenge: 'Multiple disconnected systems, data silos, compliance issues.',
-    solution:
-      'Enterprise ERP implementation, data consolidation, compliance framework, staff training.',
+    image: '/images/case-study-3-hero.jpg',
+    challenge: 'Rising operational costs and inconsistent quality across 50+ facilities',
+    solution: 'Lean Six Sigma program with standardized processes and continuous improvement',
     results: [
-      '100% data integration across systems',
-      'Achieved SOC 2 compliance',
-      'Patient data accessibility: +30%',
-      'Annual cost savings: $2M',
+      { metric: 'Operating Cost', value: '22% reduction' },
+      { metric: 'Patient Satisfaction', value: '+28%' },
+      { metric: 'Staff Efficiency', value: '+35%' },
+      { metric: 'Quality Metrics', value: 'Top quartile' },
     ],
+    slug: 'healthcare-operational-excellence',
   },
   {
     id: 4,
-    title: 'ManufactureCo Market Entry Strategy',
-    client: 'ManufactureCo Global',
+    title: 'Digital ERP Implementation',
+    client: 'Industrial Equipment Manufacturer',
     industry: 'Manufacturing',
-    duration: '12 months',
-    teamSize: 8,
-    challenge:
-      'Entering new Asian markets, unclear competitive landscape, operational setup needed.',
-    solution:
-      'Market analysis, competitive intelligence, go-to-market strategy, local partnership setup.',
+    image: '/images/case-study-4-hero.jpg',
+    challenge: 'Legacy systems across 8 plants preventing real-time visibility and agility',
+    solution: 'Cloud-based ERP deployment with change management and training',
     results: [
-      'Successfully entered 3 new markets',
-      'Year 1 revenue: $50M',
-      'Market share: 25% in target segments',
-      'Local operations established in 2 countries',
+      { metric: 'System Integration', value: '100%' },
+      { metric: 'Data Accuracy', value: '99.8%' },
+      { metric: 'Reporting Speed', value: '80% faster' },
+      { metric: 'ROI Timeline', value: '14 months' },
     ],
-  },
-  {
-    id: 5,
-    title: 'RetailPro Omnichannel Transformation',
-    client: 'RetailPro Networks',
-    industry: 'Retail',
-    duration: '10 months',
-    teamSize: 7,
-    challenge:
-      'Implementing omnichannel strategy, employee resistance, legacy mindset.',
-    solution:
-      'Change communication strategy, employee training, leadership alignment, phased rollout.',
-    results: [
-      'Employee adoption rate: 85%',
-      'Omnichannel sales: +60%',
-      'Customer satisfaction: +38%',
-      'Staff turnover reduced: 25%',
-    ],
+    slug: 'industrial-erp-transformation',
   },
 ];
 
 export default function WorkPage() {
+  const [selectedIndustry, setSelectedIndustry] = useState<string>('All');
+
+  const industries = ['All', ...new Set(caseStudies.map((cs) => cs.industry))];
+  const filtered =
+    selectedIndustry === 'All'
+      ? caseStudies
+      : caseStudies.filter((cs) => cs.industry === selectedIndustry);
+
   return (
-    <main className="bg-cream">
+    <main className="bg-white">
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 md:px-12 bg-white border-b border-gold/10">
+      <section className="pt-32 pb-20 px-6 md:px-12 bg-brand-light border-b border-slate-200">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center animate-fade-in-up">
-            <h1 className="text-5xl md:text-6xl font-bold text-navy mb-6 font-serif">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold text-brand-dark mb-6 font-serif">
               Our Work
             </h1>
-            <p className="text-xl text-light max-w-3xl mx-auto leading-relaxed">
-              Proven results across industries. See how we've transformed businesses like yours.
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Proven results across industries. See how we've transformed enterprise operations.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Case Studies */}
-      <section className="py-20 px-6 md:px-12 bg-cream">
+      {/* Filter */}
+      <section className="py-12 px-6 md:px-12 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto">
-          <div className="space-y-12">
-            {caseStudies.map((study, idx) => (
-              <div
-                key={study.id}
-                className={`bg-white rounded-xl p-8 md:p-12 shadow-md hover:shadow-lg transition-all duration-300 border border-gold/10 animate-fade-in-up grid md:grid-cols-2 gap-8 ${
-                  idx % 2 === 1 ? 'md:grid-flow-dense' : ''
+          <div className="flex flex-wrap gap-3 justify-center">
+            {industries.map((industry) => (
+              <button
+                key={industry}
+                onClick={() => setSelectedIndustry(industry)}
+                className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
+                  selectedIndustry === industry
+                    ? 'bg-brand-accent text-white shadow-lg'
+                    : 'bg-brand-light text-brand-dark hover:bg-slate-200'
                 }`}
-                style={{ animationDelay: `${idx * 100}ms` }}
               >
-                {/* Left - Info */}
-                <div>
-                  <div className="mb-4 flex flex-wrap gap-2">
-                    <span className="bg-gold/10 text-gold px-3 py-1 rounded-full text-sm font-semibold">
-                      {study.industry}
-                    </span>
-                  </div>
+                {industry}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                  <h3 className="text-2xl font-bold text-navy mb-4 font-serif">
-                    {study.title}
-                  </h3>
-
-                  <div className="space-y-2 mb-6 text-sm text-dark">
-                    <p>
-                      <strong>Client:</strong> {study.client}
-                    </p>
-                    <p>
-                      <strong>Duration:</strong> {study.duration}
-                    </p>
-                    <p>
-                      <strong>Team Size:</strong> {study.teamSize} consultants
-                    </p>
-                  </div>
-
-                  <div className="space-y-4 mb-6">
-                    <div>
-                      <h4 className="font-bold text-navy mb-2">Challenge</h4>
-                      <p className="text-dark text-sm leading-relaxed">{study.challenge}</p>
-                    </div>
-
-                    <div>
-                      <h4 className="font-bold text-navy mb-2">Solution</h4>
-                      <p className="text-dark text-sm leading-relaxed">{study.solution}</p>
+      {/* Case Studies Grid */}
+      <section className="py-20 px-6 md:px-12 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8">
+            {filtered.map((study) => (
+              <Link key={study.id} href={`/work/${study.slug}`}>
+                <div className="group cursor-pointer h-full">
+                  <div className="relative h-64 rounded-lg overflow-hidden mb-6 shadow-lg">
+                    <Image
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      quality={85}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <span className="inline-block bg-brand-accent text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        {study.industry}
+                      </span>
                     </div>
                   </div>
 
-                  <Link href="/contact">
-                    <button className="text-gold font-semibold hover:translate-x-2 transition-transform duration-300">
-                      Read Full Case Study →
-                    </button>
-                  </Link>
-                </div>
+                  <div className="space-y-3">
+                    <h3 className="text-2xl font-bold text-brand-dark font-serif group-hover:text-brand-accent transition-colors">
+                      {study.title}
+                    </h3>
+                    <p className="text-slate-600">{study.client}</p>
+                    <p className="text-slate-700 leading-relaxed">{study.challenge}</p>
 
-                {/* Right - Results */}
-                <div>
-                  <h4 className="text-lg font-bold text-navy mb-6 font-serif">Results</h4>
-                  <ul className="space-y-4">
-                    {study.results.map((result) => (
-                      <li key={result} className="flex items-start gap-3">
-                        <CheckCircle size={20} className="text-gold mt-0.5 flex-shrink-0" />
-                        <span className="text-dark">{result}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    {/* Quick Results */}
+                    <div className="grid grid-cols-2 gap-4 pt-4">
+                      {study.results.slice(0, 2).map((result, idx) => (
+                        <div key={idx} className="bg-brand-light rounded-lg p-3">
+                          <div className="text-brand-accent font-bold text-lg">{result.value}</div>
+                          <div className="text-xs text-slate-600">{result.metric}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="text-brand-accent font-semibold group-hover:translate-x-2 transition-transform duration-300 pt-4 flex items-center gap-2">
+                      Read Case Study <ArrowRight size={16} />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 md:px-12 bg-navy">
+      <section className="py-20 px-6 md:px-12 bg-brand-dark">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6 font-serif">
-            Ready to Achieve Similar Results?
+            Ready to Transform Your Operations?
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can transform your business
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+            Let's discuss how we can deliver measurable results for your enterprise
           </p>
           <Link href="/contact">
-            <button className="bg-gold text-navy px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300">
-              Schedule a Consultation
+            <button className="bg-brand-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl">
+              Schedule Consultation
             </button>
           </Link>
         </div>

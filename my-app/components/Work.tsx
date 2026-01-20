@@ -1,5 +1,5 @@
 'use client';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface WorkItem {
@@ -54,14 +54,14 @@ const workItems: WorkItem[] = [
 
 export default function Work() {
   return (
-    <section className="py-20 px-6 md:px-12 bg-cream">
+    <section className="py-20 px-6 md:px-12 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-4 font-serif">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif animate-slide-down">
             Featured Work
           </h2>
-          <p className="text-xl text-light max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             Proven results across industries. See how we've transformed businesses like yours.
           </p>
         </div>
@@ -71,45 +71,46 @@ export default function Work() {
           {workItems.map((item, idx) => (
             <div
               key={item.title}
-              className="bg-white rounded-xl p-8 md:p-12 shadow-md hover:shadow-lg transition-all duration-300 border border-gold/10 animate-fade-in-up"
+              className="bg-white rounded-xl p-8 md:p-12 shadow-md hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-blue-400 transform hover:scale-105 animate-fade-in-up"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Left - Info */}
                 <div>
                   <div className="mb-4 flex flex-wrap gap-2">
-                    <span className="bg-gold/10 text-gold px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
                       {item.industry}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-navy mb-2 font-serif">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2 font-serif">
                     {item.title}
                   </h3>
 
-                  <p className="text-light mb-4">
-                    <strong className="text-navy">Client:</strong> {item.client}
+                  <p className="text-slate-600 mb-4">
+                    <strong className="text-slate-900">Client:</strong> {item.client}
                   </p>
 
-                  <p className="text-dark mb-6 leading-relaxed">
+                  <p className="text-slate-700 mb-6 leading-relaxed">
                     {item.description}
                   </p>
 
                   <Link href="/work">
-                    <button className="text-gold font-semibold hover:translate-x-2 transition-transform duration-300">
-                      Read Full Case Study →
+                    <button className="text-blue-600 font-semibold hover:text-blue-700 transition-all duration-300 flex items-center gap-2 group">
+                      Read Full Case Study
+                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                   </Link>
                 </div>
 
                 {/* Right - Results */}
                 <div>
-                  <h4 className="text-lg font-bold text-navy mb-4 font-serif">Results</h4>
+                  <h4 className="text-lg font-bold text-slate-900 mb-4 font-serif">Results</h4>
                   <ul className="space-y-3">
                     {item.results.map((result) => (
                       <li key={result} className="flex items-start gap-3">
-                        <CheckCircle size={20} className="text-gold mt-0.5 flex-shrink-0" />
-                        <span className="text-dark">{result}</span>
+                        <CheckCircle size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span className="text-slate-700">{result}</span>
                       </li>
                     ))}
                   </ul>
@@ -120,9 +121,9 @@ export default function Work() {
         </div>
 
         {/* View All */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           <Link href="/work">
-            <button className="bg-gold text-navy px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300">
+            <button className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95">
               View All Work
             </button>
           </Link>

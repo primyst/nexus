@@ -358,9 +358,9 @@ export default function CaseStudyPage() {
     return (
       <main className="bg-white">
         <section className="pt-32 pb-20 px-6 md:px-12 text-center">
-          <h1 className="text-4xl font-bold text-brand-dark mb-4">Case Study Not Found</h1>
+          <h1 className="text-4xl font-bold text-slate-900 mb-4">Case Study Not Found</h1>
           <Link href="/work">
-            <button className="text-brand-accent font-semibold hover:text-brand-blue">
+            <button className="text-blue-600 font-semibold hover:text-blue-700">
               ← Back to Work
             </button>
           </Link>
@@ -372,9 +372,9 @@ export default function CaseStudyPage() {
   return (
     <main className="bg-white">
       {/* Back Link */}
-      <div className="pt-24 px-6 md:px-12 bg-white">
+      <div className="pt-24 px-6 md:px-12 bg-white animate-fade-in">
         <div className="max-w-4xl mx-auto">
-          <Link href="/work" className="inline-flex items-center gap-2 text-brand-accent hover:text-brand-blue transition-colors mb-8">
+          <Link href="/work" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors mb-8 transform hover:translate-x-1">
             <ArrowLeft size={18} />
             Back to Work
           </Link>
@@ -382,31 +382,31 @@ export default function CaseStudyPage() {
       </div>
 
       {/* Hero Image */}
-      <section className="px-6 md:px-12 pb-12">
+      <section className="px-6 md:px-12 pb-12 animate-fade-in-up">
         <div className="max-w-4xl mx-auto">
-          <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
+          <div className="relative h-96 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <Image
               src={study.image}
               alt={study.title}
               fill
-              className="object-cover"
+              className="object-cover hover:scale-105 transition-transform duration-500"
               quality={90}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
           </div>
         </div>
       </section>
 
       {/* Header */}
-      <section className="px-6 md:px-12 pb-12">
+      <section className="px-6 md:px-12 pb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
         <div className="max-w-4xl mx-auto">
           <div className="mb-6">
-            <span className="inline-block bg-brand-accent/20 text-brand-accent px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <span className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
               {study.industry}
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-brand-dark mb-4 font-serif">
+          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-4 font-serif animate-slide-down">
             {study.title}
           </h1>
 
@@ -414,18 +414,18 @@ export default function CaseStudyPage() {
 
           {/* Project Details */}
           <div className="grid md:grid-cols-2 gap-6 py-8 border-t border-b border-slate-200">
-            <div className="flex items-center gap-4">
-              <Calendar className="text-brand-accent" size={24} />
+            <div className="flex items-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+              <Calendar className="text-blue-600" size={24} />
               <div>
                 <div className="text-sm text-slate-600">Duration</div>
-                <div className="text-lg font-semibold text-brand-dark">{study.duration}</div>
+                <div className="text-lg font-semibold text-slate-900">{study.duration}</div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Users className="text-brand-accent" size={24} />
+            <div className="flex items-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <Users className="text-blue-600" size={24} />
               <div>
                 <div className="text-sm text-slate-600">Team Size</div>
-                <div className="text-lg font-semibold text-brand-dark">{study.teamSize}</div>
+                <div className="text-lg font-semibold text-slate-900">{study.teamSize}</div>
               </div>
             </div>
           </div>
@@ -433,15 +433,17 @@ export default function CaseStudyPage() {
       </section>
 
       {/* Challenge Section */}
-      <section className="px-6 md:px-12 py-16 bg-brand-light">
+      <section className="px-6 md:px-12 py-16 bg-slate-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-dark mb-4 font-serif">The Challenge</h2>
-          <p className="text-lg text-slate-700 mb-8 leading-relaxed">{study.challenge}</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-4 font-serif animate-slide-down">The Challenge</h2>
+          <p className="text-lg text-slate-700 mb-8 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            {study.challenge}
+          </p>
 
-          <div className="space-y-3">
+          <div className="space-y-3 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
             {study.challengeDetails.map((detail, idx) => (
-              <div key={idx} className="flex items-start gap-3">
-                <div className="text-brand-accent mt-1">•</div>
+              <div key={idx} className="flex items-start gap-3 animate-fade-in-up" style={{ animationDelay: `${0.2 + idx * 0.05}s` }}>
+                <div className="text-blue-600 mt-1">•</div>
                 <p className="text-slate-700">{detail}</p>
               </div>
             ))}
@@ -452,13 +454,15 @@ export default function CaseStudyPage() {
       {/* Solution Section */}
       <section className="px-6 md:px-12 py-16 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-dark mb-4 font-serif">Our Solution</h2>
-          <p className="text-lg text-slate-700 mb-8 leading-relaxed">{study.solution}</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-4 font-serif animate-slide-down">Our Solution</h2>
+          <p className="text-lg text-slate-700 mb-8 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            {study.solution}
+          </p>
 
-          <div className="space-y-3">
+          <div className="space-y-3 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
             {study.solutionDetails.map((detail, idx) => (
-              <div key={idx} className="flex items-start gap-3">
-                <CheckCircle className="text-brand-accent mt-1 flex-shrink-0" size={20} />
+              <div key={idx} className="flex items-start gap-3 animate-fade-in-up" style={{ animationDelay: `${0.2 + idx * 0.05}s` }}>
+                <CheckCircle className="text-blue-600 mt-1 flex-shrink-0" size={20} />
                 <p className="text-slate-700">{detail}</p>
               </div>
             ))}
@@ -467,17 +471,21 @@ export default function CaseStudyPage() {
       </section>
 
       {/* Results Section */}
-      <section className="px-6 md:px-12 py-16 bg-brand-light">
+      <section className="px-6 md:px-12 py-16 bg-slate-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-dark mb-12 font-serif">Results Achieved</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-12 font-serif animate-slide-down">Results Achieved</h2>
 
           <div className="grid md:grid-cols-2 gap-8">
             {study.results.map((result, idx) => (
-              <div key={idx} className="bg-white rounded-lg p-8 border border-slate-200">
+              <div 
+                key={idx} 
+                className="bg-white rounded-lg p-8 border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-scale-in"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
                 <div className="flex items-start gap-3 mb-3">
-                  <TrendingUp className="text-brand-accent flex-shrink-0" size={24} />
+                  <TrendingUp className="text-blue-600 flex-shrink-0" size={24} />
                   <div>
-                    <div className="text-4xl font-bold text-brand-accent font-serif">
+                    <div className="text-4xl font-bold text-blue-600 font-serif">
                       {result.value}
                     </div>
                     <div className="text-sm text-slate-600 mt-1">{result.metric}</div>
@@ -493,25 +501,25 @@ export default function CaseStudyPage() {
       {/* Process Timeline */}
       <section className="px-6 md:px-12 py-16 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-brand-dark mb-12 font-serif">Implementation Process</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-12 font-serif animate-slide-down">Implementation Process</h2>
 
           <div className="space-y-8">
             {study.process.map((item, idx) => (
-              <div key={idx} className="flex gap-8">
+              <div key={idx} className="flex gap-8 animate-fade-in-up" style={{ animationDelay: `${idx * 0.1}s` }}>
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-brand-accent rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg transform hover:scale-110 transition-transform duration-300">
                     {idx + 1}
                   </div>
                   {idx < study.process.length - 1 && (
-                    <div className="w-1 h-20 bg-brand-accent/30 mt-4" />
+                    <div className="w-1 h-20 bg-blue-200 mt-4" />
                   )}
                 </div>
 
                 <div className="pb-8">
-                  <h3 className="text-xl font-bold text-brand-dark mb-2 font-serif">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 font-serif">
                     {item.phase}
                   </h3>
-                  <p className="text-sm text-brand-accent font-semibold mb-2">{item.duration}</p>
+                  <p className="text-sm text-blue-600 font-semibold mb-2">{item.duration}</p>
                   <p className="text-slate-700">{item.description}</p>
                 </div>
               </div>
@@ -521,10 +529,10 @@ export default function CaseStudyPage() {
       </section>
 
       {/* Testimonial */}
-      <section className="px-6 md:px-12 py-16 bg-brand-dark">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-md rounded-lg p-12 border border-white/20">
-            <div className="text-4xl text-brand-accent mb-6">"</div>
+      <section className="px-6 md:px-12 py-16 bg-slate-900">
+        <div className="max-w-4xl mx-auto animate-fade-in-up">
+          <div className="bg-white/10 backdrop-blur-md rounded-lg p-12 border border-white/20 hover:border-blue-400/50 transition-all duration-300 transform hover:scale-105">
+            <div className="text-4xl text-blue-400 mb-6">"</div>
             <p className="text-2xl text-white mb-8 leading-relaxed font-serif">
               {study.testimonial.quote}
             </p>
@@ -539,8 +547,8 @@ export default function CaseStudyPage() {
 
       {/* Related Work CTA */}
       <section className="px-6 md:px-12 py-16 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-brand-dark mb-6 font-serif">
+        <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
+          <h2 className="text-3xl font-bold text-slate-900 mb-6 font-serif">
             Ready to Transform Your Operations?
           </h2>
           <p className="text-lg text-slate-600 mb-8">
@@ -548,12 +556,12 @@ export default function CaseStudyPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
-              <button className="bg-brand-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl">
+              <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95">
                 Schedule Consultation
               </button>
             </Link>
             <Link href="/work">
-              <button className="border-2 border-brand-accent text-brand-accent px-8 py-3 rounded-lg font-semibold hover:bg-brand-accent hover:text-white transition-all duration-300">
+              <button className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95">
                 View More Work
               </button>
             </Link>

@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { Linkedin, Mail } from 'lucide-react';
+import Link from 'next/link';
 
 interface TeamMember {
   name: string;
@@ -62,13 +63,13 @@ export default function TeamPage() {
   return (
     <main className="bg-white">
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 md:px-12 bg-brand-light border-b border-slate-200">
+      <section className="pt-32 pb-20 px-6 md:px-12 bg-slate-50 border-b border-slate-200 animate-fade-in">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-brand-dark mb-6 font-serif">
+            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 font-serif animate-slide-down">
               Our Team
             </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               80+ senior consultants with deep industry expertise and proven track records
             </p>
           </div>
@@ -78,28 +79,28 @@ export default function TeamPage() {
       {/* Leadership */}
       <section className="py-20 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-brand-dark mb-12 text-center font-serif">
+          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center font-serif animate-slide-down">
             Leadership
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {leadership.map((member, idx) => (
-              <TeamCard key={idx} member={member} />
+              <TeamCard key={idx} member={member} delay={idx * 0.1} />
             ))}
           </div>
         </div>
       </section>
 
       {/* Senior Consultants */}
-      <section className="py-20 px-6 md:px-12 bg-brand-light">
+      <section className="py-20 px-6 md:px-12 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-brand-dark mb-12 text-center font-serif">
+          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center font-serif animate-slide-down">
             Senior Consultants
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {consultants.map((member, idx) => (
-              <TeamCard key={idx} member={member} />
+              <TeamCard key={idx} member={member} delay={idx * 0.1} />
             ))}
           </div>
         </div>
@@ -108,7 +109,7 @@ export default function TeamPage() {
       {/* Culture Section */}
       <section className="py-20 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-brand-dark mb-12 text-center font-serif">
+          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center font-serif animate-slide-down">
             Our Culture
           </h2>
 
@@ -129,9 +130,10 @@ export default function TeamPage() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-brand-light rounded-lg p-8 border border-slate-200 text-center"
+                className="bg-slate-50 rounded-lg p-8 border border-slate-200 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 text-center animate-fade-in-up"
+                style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <h3 className="text-2xl font-bold text-brand-dark mb-3 font-serif">
+                <h3 className="text-2xl font-bold text-slate-900 mb-3 font-serif">
                   {item.title}
                 </h3>
                 <p className="text-slate-700">{item.description}</p>
@@ -142,8 +144,8 @@ export default function TeamPage() {
       </section>
 
       {/* Join Us CTA */}
-      <section className="py-20 px-6 md:px-12 bg-brand-dark">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="py-20 px-6 md:px-12 bg-slate-900">
+        <div className="max-w-7xl mx-auto text-center animate-fade-in-up">
           <h2 className="text-4xl font-bold text-white mb-6 font-serif">
             Join Our Team
           </h2>
@@ -151,7 +153,7 @@ export default function TeamPage() {
             We're always looking for talented consultants to join our growing team
           </p>
           <a href="mailto:careers@nexuscorporate.com">
-            <button className="bg-brand-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl">
+            <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95">
               View Opportunities
             </button>
           </a>
@@ -161,22 +163,25 @@ export default function TeamPage() {
   );
 }
 
-function TeamCard({ member }: { member: TeamMember }) {
+function TeamCard({ member, delay }: { member: TeamMember; delay: number }) {
   return (
-    <div className="bg-white rounded-lg overflow-hidden border border-slate-200 hover:border-brand-accent hover:shadow-lg transition-all duration-300">
+    <div 
+      className="bg-white rounded-lg overflow-hidden border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
+      style={{ animationDelay: `${delay}s` }}
+    >
       <div className="relative h-64 overflow-hidden">
         <Image
           src={member.image}
           alt={member.name}
           fill
-          className="object-cover"
+          className="object-cover hover:scale-110 transition-transform duration-500"
           quality={85}
         />
       </div>
 
       <div className="p-8">
-        <h3 className="text-2xl font-bold text-brand-dark mb-1 font-serif">{member.name}</h3>
-        <p className="text-brand-accent font-semibold mb-4">{member.title}</p>
+        <h3 className="text-2xl font-bold text-slate-900 mb-1 font-serif">{member.name}</h3>
+        <p className="text-blue-600 font-semibold mb-4">{member.title}</p>
         <p className="text-slate-700 mb-6 leading-relaxed">{member.bio}</p>
 
         <div className="mb-6">
@@ -185,7 +190,7 @@ function TeamCard({ member }: { member: TeamMember }) {
             {member.expertise.map((skill, idx) => (
               <span
                 key={idx}
-                className="bg-brand-light text-brand-dark text-xs px-3 py-1 rounded-full"
+                className="bg-slate-100 text-slate-700 text-xs px-3 py-1 rounded-full"
               >
                 {skill}
               </span>
@@ -194,10 +199,10 @@ function TeamCard({ member }: { member: TeamMember }) {
         </div>
 
         <div className="flex gap-3 pt-4 border-t border-slate-200">
-          <a href="#" className="text-slate-400 hover:text-brand-accent transition-colors">
+          <a href="#" className="text-slate-400 hover:text-blue-600 transition-colors transform hover:scale-110">
             <Linkedin size={20} />
           </a>
-          <a href="#" className="text-slate-400 hover:text-brand-accent transition-colors">
+          <a href="#" className="text-slate-400 hover:text-blue-600 transition-colors transform hover:scale-110">
             <Mail size={20} />
           </a>
         </div>

@@ -1,6 +1,11 @@
 import Image from 'next/image';
 
-export default function Hero() {
+interface HeroProps {
+  headline?: string;
+  subtext?: string;
+}
+
+export default function Hero({ headline, subtext }: HeroProps) {
   return (
     <section className="relative min-h-[100svh] w-full">
       {/* Background image */}
@@ -19,12 +24,12 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 pt-24 text-white">
         <div className="max-w-3xl">
           <h1 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-            Delivering reliable solutions for complex business challenges
+            {headline ?? 'Delivering reliable solutions for complex business challenges'}
           </h1>
 
           <p className="mt-6 text-base leading-relaxed text-white/80 md:text-lg">
-            Nexus Corporate partners with organizations to design, build, and
-            deliver solutions that stand up to real-world demands.
+            {subtext ??
+              'Nexus Corporate partners with organizations to design, build, and deliver solutions that stand up to real-world demands.'}
           </p>
 
           {/* CTAs */}
@@ -78,17 +83,11 @@ function Stat({ value, label, dark = false }: StatProps) {
   return (
     <div className="text-left">
       <div
-        className={`text-2xl font-semibold ${
-          dark ? 'text-black' : 'text-white'
-        }`}
+        className={`text-2xl font-semibold ${dark ? 'text-black' : 'text-white'}`}
       >
         {value}
       </div>
-      <div
-        className={`mt-1 text-sm ${
-          dark ? 'text-black/60' : 'text-white/70'
-        }`}
-      >
+      <div className={`mt-1 text-sm ${dark ? 'text-black/60' : 'text-white/70'}`}>
         {label}
       </div>
     </div>

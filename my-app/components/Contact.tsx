@@ -82,11 +82,11 @@ export default function Contact() {
   };
 
   return (
-    <section className="py-20 px-6 md:px-12 bg-cream">
+    <section className="py-20 px-6 md:px-12 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-4 font-serif animate-slide-down">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif animate-slide-down">
             Get in Touch
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
@@ -105,12 +105,12 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="md:col-span-2 animate-fade-in-right" style={{ animationDelay: '0.2s' }}>
-            <form onSubmit={handleSubmit} className="bg-white rounded-xl p-8 border border-gold/10 space-y-6 shadow-md hover:shadow-lg transition-all duration-300">
+            <form onSubmit={handleSubmit} className="bg-white rounded-xl p-8 border border-slate-200 space-y-6 shadow-md hover:shadow-lg transition-all duration-300">
               {/* Name & Email Row */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                  <label className="block text-sm font-semibold text-navy mb-2">
-                    Name <span className="text-gold">*</span>
+                  <label className="block text-sm font-semibold text-slate-900 mb-2">
+                    Name <span className="text-blue-600">*</span>
                   </label>
                   <input
                     type="text"
@@ -119,12 +119,12 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all text-slate-900 placeholder:text-slate-500"
+                    className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900 placeholder:text-slate-500"
                   />
                 </div>
                 <div className="animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
-                  <label className="block text-sm font-semibold text-navy mb-2">
-                    Email <span className="text-gold">*</span>
+                  <label className="block text-sm font-semibold text-slate-900 mb-2">
+                    Email <span className="text-blue-600">*</span>
                   </label>
                   <input
                     type="email"
@@ -133,14 +133,14 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all text-slate-900 placeholder:text-slate-500"
+                    className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900 placeholder:text-slate-500"
                   />
                 </div>
               </div>
 
               {/* Company */}
               <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <label className="block text-sm font-semibold text-navy mb-2">
+                <label className="block text-sm font-semibold text-slate-900 mb-2">
                   Company Name
                 </label>
                 <input
@@ -149,14 +149,14 @@ export default function Contact() {
                   placeholder="Your Company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all text-slate-900 placeholder:text-slate-500"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900 placeholder:text-slate-500"
                 />
               </div>
 
               {/* Message */}
               <div className="animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
-                <label className="block text-sm font-semibold text-navy mb-2">
-                  Message <span className="text-gold">*</span>
+                <label className="block text-sm font-semibold text-slate-900 mb-2">
+                  Message <span className="text-blue-600">*</span>
                 </label>
                 <textarea
                   name="message"
@@ -165,7 +165,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all text-slate-900 placeholder:text-slate-500 resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900 placeholder:text-slate-500 resize-none"
                 />
                 <p className="text-xs text-slate-600 mt-1">
                   {formData.message.length} characters (minimum 10)
@@ -182,7 +182,7 @@ export default function Contact() {
 
               {/* Success Message */}
               {submitted && (
-                <div className="bg-teal/10 border border-teal text-teal px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 animate-pulse">
+                <div className="bg-emerald-50 border border-emerald-300 text-emerald-700 px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 animate-pulse">
                   <CheckCircle size={18} />
                   Thank you! We'll respond within 24 hours.
                 </div>
@@ -192,7 +192,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={loading || submitted}
-                className="w-full bg-gold text-navy px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg animate-fade-in-up"
+                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg animate-fade-in-up"
                 style={{ animationDelay: '0.3s' }}
               >
                 <Send size={18} />
@@ -212,21 +212,19 @@ export default function Contact() {
 }
 
 function ContactCard({ icon, title, content, href, delay }: { icon: React.ReactNode; title: string; content: string; href?: string; delay: number }) {
-  const Component = href ? 'a' : 'div';
-  
   return (
     <div 
-      className="bg-white rounded-xl p-6 border border-gold/10 hover:border-gold/40 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
+      className="bg-white rounded-xl p-6 border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
       style={{ animationDelay: `${delay}s` }}
     >
       <div className="flex items-start gap-4">
-        <div className="bg-gold/10 p-3 rounded-lg flex-shrink-0">
-          <div className="text-gold">{icon}</div>
+        <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
+          <div className="text-blue-600">{icon}</div>
         </div>
         <div>
-          <h4 className="font-bold text-navy mb-2">{title}</h4>
+          <h4 className="font-bold text-slate-900 mb-2">{title}</h4>
           {href ? (
-            <a href={href} className="text-gold hover:text-gold/80 transition-colors text-sm break-all font-medium">
+            <a href={href} className="text-blue-600 hover:text-blue-700 transition-colors text-sm break-all font-medium">
               {content}
             </a>
           ) : (

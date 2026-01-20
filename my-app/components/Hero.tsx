@@ -11,7 +11,7 @@ export default function Hero() {
                 <Image
           src="/hero-boardroom.webp"
           fill
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-full" alt="Enterprise business solutions"
           priority
           quality={85}
           sizes="100vw"

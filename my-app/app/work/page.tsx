@@ -25,7 +25,7 @@ const caseStudies: CaseStudy[] = [
     title: 'Supply Chain Transformation',
     client: 'Global Manufacturing Corp',
     industry: 'Manufacturing',
-    image: '/images/case-study-1-hero.jpg',
+    image: '/case-study-1-hero.jpg',
     challenge: 'Complex multi-region supply chain with 40% excess inventory and high logistics costs',
     solution: 'Implemented demand-driven planning, vendor consolidation, and network optimization',
     results: [
@@ -41,7 +41,7 @@ const caseStudies: CaseStudy[] = [
     title: 'Finance Shared Services Center',
     client: 'Fortune 500 Financial Services',
     industry: 'Finance',
-    image: '/images/case-study-2-hero.jpg',
+    image: '/case-study-2-hero.jpg',
     challenge: 'Fragmented finance operations across 12 locations with high processing costs',
     solution: 'Established shared services center with RPA and process automation',
     results: [
@@ -57,7 +57,7 @@ const caseStudies: CaseStudy[] = [
     title: 'Operational Excellence Program',
     client: 'Healthcare Provider Network',
     industry: 'Healthcare',
-    image: '/images/case-study-3-hero.jpg',
+    image: '/case-study-3-hero.jpg',
     challenge: 'Rising operational costs and inconsistent quality across 50+ facilities',
     solution: 'Lean Six Sigma program with standardized processes and continuous improvement',
     results: [
@@ -73,7 +73,7 @@ const caseStudies: CaseStudy[] = [
     title: 'Digital ERP Implementation',
     client: 'Industrial Equipment Manufacturer',
     industry: 'Manufacturing',
-    image: '/images/case-study-4-hero.jpg',
+    image: '/case-study-4-hero.jpg',
     challenge: 'Legacy systems across 8 plants preventing real-time visibility and agility',
     solution: 'Cloud-based ERP deployment with change management and training',
     results: [

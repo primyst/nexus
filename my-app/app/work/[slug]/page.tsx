@@ -40,7 +40,7 @@ const caseStudies: Record<string, CaseStudyDetail> = {
     title: 'Supply Chain Transformation',
     client: 'Global Manufacturing Corp',
     industry: 'Manufacturing',
-    image: '/images/case-study-1-hero.jpg',
+    image: '/case-study-1-hero.jpg',
     duration: '8 months',
     teamSize: '15 consultants',
     challenge:
@@ -118,7 +118,7 @@ const caseStudies: Record<string, CaseStudyDetail> = {
     title: 'Finance Shared Services Center',
     client: 'Fortune 500 Financial Services',
     industry: 'Finance',
-    image: '/images/case-study-2-hero.jpg',
+    image: '/case-study-2-hero.jpg',
     duration: '12 months',
     teamSize: '22 consultants',
     challenge:
@@ -196,7 +196,7 @@ const caseStudies: Record<string, CaseStudyDetail> = {
     title: 'Operational Excellence Program',
     client: 'Healthcare Provider Network',
     industry: 'Healthcare',
-    image: '/images/case-study-3-hero.jpg',
+    image: '/case-study-3-hero.jpg',
     duration: '14 months',
     teamSize: '18 consultants',
     challenge:
@@ -274,7 +274,7 @@ const caseStudies: Record<string, CaseStudyDetail> = {
     title: 'Digital ERP Implementation',
     client: 'Industrial Equipment Manufacturer',
     industry: 'Manufacturing',
-    image: '/images/case-study-4-hero.jpg',
+    image: '/case-study-4-hero.jpg',
     duration: '16 months',
     teamSize: '25 consultants',
     challenge:

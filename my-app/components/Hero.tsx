@@ -1,4 +1,6 @@
+'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface HeroProps {
   headline?: string;
@@ -23,7 +25,7 @@ export default function Hero({ headline, subtext }: HeroProps) {
       {/* Content */}
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 pt-24 text-white">
         <div className="max-w-3xl">
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+          <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
             {headline ?? 'Delivering reliable solutions for complex business challenges'}
           </h1>
 
@@ -34,40 +36,36 @@ export default function Hero({ headline, subtext }: HeroProps) {
 
           {/* CTAs */}
           <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href="#services"
+            <Link
+              href="/services"
               className="rounded-md bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-white/90"
             >
               View Services
-            </a>
-            <a
-              href="#contact"
+            </Link>
+            <Link
+              href="/contact"
               className="rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-black"
             >
               Contact Us
-            </a>
-          </div>
-
-          {/* Stats – mobile */}
-          <div className="mt-12 grid grid-cols-2 gap-6 md:hidden">
-            <Stat value="10+" label="Years Experience" />
-            <Stat value="120+" label="Projects Delivered" />
-            <Stat value="15+" label="Industries Served" />
-            <Stat value="100%" label="Client-Focused" />
+            </Link>
           </div>
         </div>
       </div>
 
+      {/* Stats – mobile */}
+      <div className="mt-12 grid grid-cols-2 gap-6 px-6 md:hidden">
+        <Stat value="10+" label="Years Experience" />
+        <Stat value="120+" label="Projects Delivered" />
+        <Stat value="15+" label="Industries Served" />
+        <Stat value="100%" label="Client-Focused" />
+      </div>
+
       {/* Stats – desktop */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 hidden md:block">
-        <div className="mx-auto max-w-7xl px-6 pb-8">
-          <div className="grid grid-cols-4 gap-6 rounded-lg bg-white/95 px-8 py-6 text-black">
-            <Stat value="10+" label="Years Experience" dark />
-            <Stat value="120+" label="Projects Delivered" dark />
-            <Stat value="15+" label="Industries Served" dark />
-            <Stat value="100%" label="Client-Focused" dark />
-          </div>
-        </div>
+      <div className="absolute bottom-0 left-0 right-0 z-10 hidden md:flex justify-center gap-6 pb-8">
+        <Stat value="10+" label="Years Experience" />
+        <Stat value="120+" label="Projects Delivered" />
+        <Stat value="15+" label="Industries Served" />
+        <Stat value="100%" label="Client-Focused" />
       </div>
     </section>
   );
@@ -76,20 +74,13 @@ export default function Hero({ headline, subtext }: HeroProps) {
 interface StatProps {
   value: string;
   label: string;
-  dark?: boolean;
 }
 
-function Stat({ value, label, dark = false }: StatProps) {
+function Stat({ value, label }: StatProps) {
   return (
-    <div className="text-left">
-      <div
-        className={`text-2xl font-semibold ${dark ? 'text-black' : 'text-white'}`}
-      >
-        {value}
-      </div>
-      <div className={`mt-1 text-sm ${dark ? 'text-black/60' : 'text-white/70'}`}>
-        {label}
-      </div>
+    <div className="flex flex-col items-center rounded-lg bg-white px-6 py-4 text-black shadow-md min-w-[120px]">
+      <div className="text-2xl font-semibold">{value}</div>
+      <div className="mt-1 text-sm text-black/60">{label}</div>
     </div>
   );
 }

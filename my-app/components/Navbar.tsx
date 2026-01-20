@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-200 shadow-sm animate-slide-down">
       {/* Logo */}
-      <Link href="/" className="text-2xl font-bold text-brand-blue font-serif hover:text-brand-accent transition-colors duration-300 transform hover:scale-105">
+      <Link href="/" className="text-2xl font-bold text-blue-600 font-serif hover:text-blue-700 transition-colors duration-300 transform hover:scale-105">
         Nexus
       </Link>
 
@@ -19,18 +19,18 @@ export default function Navbar() {
           <Link 
             key={item}
             href={`/${item === 'Home' ? '' : item.toLowerCase()}`} 
-            className="hover:text-brand-accent transition-colors duration-300 font-medium relative group animate-fade-in-up"
+            className="hover:text-blue-600 transition-colors duration-300 font-medium relative group animate-fade-in-up"
             style={{ animationDelay: `${0.05 * idx}s` }}
           >
             {item}
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-accent group-hover:w-full transition-all duration-300" />
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300" />
           </Link>
         ))}
       </div>
 
       {/* CTA Button */}
       <Link href="/contact" className="hidden md:block animate-fade-in-right">
-        <button className="bg-brand-accent text-white px-6 py-2 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95">
+        <button className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95">
           Get Started
         </button>
       </Link>
@@ -38,7 +38,7 @@ export default function Navbar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden text-brand-blue transform transition-transform duration-300 hover:scale-110"
+        className="md:hidden text-blue-600 transform transition-transform duration-300 hover:scale-110"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
@@ -51,14 +51,14 @@ export default function Navbar() {
               key={item}
               href={`/${item === 'Home' ? '' : item.toLowerCase()}`} 
               onClick={() => setIsOpen(false)} 
-              className="hover:text-brand-accent transition-colors font-medium animate-fade-in-up"
+              className="hover:text-blue-600 transition-colors font-medium animate-fade-in-up"
               style={{ animationDelay: `${0.05 * idx}s` }}
             >
               {item}
             </Link>
           ))}
           <Link href="/contact" onClick={() => setIsOpen(false)}>
-            <button className="bg-brand-accent text-white px-6 py-2 rounded-lg font-semibold hover:bg-brand-blue transition-all w-full transform hover:scale-105 active:scale-95">
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all w-full transform hover:scale-105 active:scale-95">
               Get Started
             </button>
           </Link>

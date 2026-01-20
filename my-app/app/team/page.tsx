@@ -1,262 +1,206 @@
 'use client';
-import { Linkedin, Github, Twitter } from 'lucide-react';
-import Link from 'next/link';
+import Image from 'next/image';
+import { Linkedin, Mail } from 'lucide-react';
 
 interface TeamMember {
-  id: number;
   name: string;
   title: string;
   bio: string;
-  category: 'leadership' | 'senior' | 'consultant';
-  social: {
-    linkedin?: string;
-    github?: string;
-    twitter?: string;
-  };
+  image: string;
+  expertise: string[];
 }
 
-const teamMembers: TeamMember[] = [
+const leadership: TeamMember[] = [
   {
-    id: 1,
-    name: 'Sarah Mitchell',
+    name: 'Michael Thompson',
     title: 'Founder & CEO',
-    bio: '20+ years in management consulting. Led digital transformation for Fortune 500 companies.',
-    category: 'leadership',
-    social: { linkedin: '#', twitter: '#' },
+    bio: '25+ years in enterprise consulting. Former Partner at McKinsey & Company. Led transformations for Fortune 100 companies.',
+    image: '/images/team-ceo.jpg',
+    expertise: ['Strategy', 'Operations', 'Change Management'],
   },
   {
-    id: 2,
-    name: 'James Chen',
-    title: 'Chief Strategy Officer',
-    bio: 'Expert in organizational transformation and market strategy. Former McKinsey partner.',
-    category: 'leadership',
-    social: { linkedin: '#' },
+    name: 'Sarah Chen',
+    title: 'Chief Operating Officer',
+    bio: '20+ years in supply chain and operations. Led end-to-end transformations at Fortune 500 manufacturers.',
+    image: '/images/team-cto.jpg',
+    expertise: ['Supply Chain', 'Operations', 'Logistics'],
   },
   {
-    id: 3,
-    name: 'Maria Rodriguez',
-    title: 'Head of Digital Transformation',
-    bio: 'Cloud architecture specialist. Architected 50+ enterprise migrations.',
-    category: 'leadership',
-    social: { linkedin: '#', github: '#' },
+    name: 'David Martinez',
+    title: 'Chief Financial Officer',
+    bio: '18+ years in finance transformation. Expert in shared services, RPA, and process automation.',
+    image: '/images/team-cfo.jpg',
+    expertise: ['Finance', 'Automation', 'Shared Services'],
   },
+];
+
+const consultants: TeamMember[] = [
   {
-    id: 4,
-    name: 'David Thompson',
-    title: 'Senior Consultant - Strategic Planning',
-    bio: 'Specializes in growth strategy and market entry for tech companies.',
-    category: 'senior',
-    social: { linkedin: '#' },
-  },
-  {
-    id: 5,
-    name: 'Emily Watson',
-    title: 'Senior Consultant - Change Management',
-    bio: 'Expert in organizational psychology and change adoption strategies.',
-    category: 'senior',
-    social: { linkedin: '#' },
-  },
-  {
-    id: 6,
-    name: 'Michael Park',
-    title: 'Senior Consultant - Technology Integration',
-    bio: 'Enterprise software implementation specialist with 15+ years experience.',
-    category: 'senior',
-    social: { linkedin: '#' },
-  },
-  {
-    id: 7,
-    name: 'Lisa Johnson',
-    title: 'Consultant - Digital Strategy',
-    bio: 'Focused on helping mid-market companies accelerate digital initiatives.',
-    category: 'consultant',
-    social: { linkedin: '#' },
-  },
-  {
-    id: 8,
-    name: 'Robert Martinez',
-    title: 'Consultant - Business Analysis',
-    bio: 'Data-driven approach to process optimization and efficiency.',
-    category: 'consultant',
-    social: { linkedin: '#' },
-  },
-  {
-    id: 9,
     name: 'Jennifer Lee',
-    title: 'Consultant - Implementation',
-    bio: 'Ensures smooth project execution and stakeholder alignment.',
-    category: 'consultant',
-    social: { linkedin: '#' },
+    title: 'Senior Consultant - Supply Chain',
+    bio: 'Expert in demand planning, procurement, and logistics network optimization.',
+    image: '/images/team-ceo.jpg',
+    expertise: ['Demand Planning', 'Procurement', 'Logistics'],
   },
   {
-    id: 10,
-    name: 'Alex Kumar',
-    title: 'Consultant - Analytics & Insights',
-    bio: 'Transforms complex data into actionable business intelligence.',
-    category: 'consultant',
-    social: { linkedin: '#' },
+    name: 'Robert Williams',
+    title: 'Senior Consultant - Operations',
+    bio: 'Lean Six Sigma Master Black Belt with 15+ years of operational excellence experience.',
+    image: '/images/team-cto.jpg',
+    expertise: ['Lean Six Sigma', 'Process Improvement', 'Quality'],
+  },
+  {
+    name: 'Maria Garcia',
+    title: 'Senior Consultant - Finance',
+    bio: 'Specialist in finance shared services, RPA, and FP&A transformation.',
+    image: '/images/team-cfo.jpg',
+    expertise: ['Shared Services', 'RPA', 'FP&A'],
   },
 ];
 
 export default function TeamPage() {
-  const leadership = teamMembers.filter((m) => m.category === 'leadership');
-  const senior = teamMembers.filter((m) => m.category === 'senior');
-  const consultants = teamMembers.filter((m) => m.category === 'consultant');
-
   return (
-    <main className="bg-cream">
+    <main className="bg-white">
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 md:px-12 bg-white border-b border-gold/10">
+      <section className="pt-32 pb-20 px-6 md:px-12 bg-brand-light border-b border-slate-200">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center animate-fade-in-up">
-            <h1 className="text-5xl md:text-6xl font-bold text-navy mb-6 font-serif">
-              Meet Our Team
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold text-brand-dark mb-6 font-serif">
+              Our Team
             </h1>
-            <p className="text-xl text-light max-w-3xl mx-auto leading-relaxed">
-              45+ experienced consultants dedicated to your success
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              80+ senior consultants with deep industry expertise and proven track records
             </p>
           </div>
         </div>
       </section>
 
       {/* Leadership */}
-      <section className="py-20 px-6 md:px-12 bg-cream">
+      <section className="py-20 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-navy mb-12 font-serif">Leadership Team</h2>
+          <h2 className="text-4xl font-bold text-brand-dark mb-12 text-center font-serif">
+            Leadership
+          </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {leadership.map((member, idx) => (
-              <TeamCard key={member.id} member={member} delay={idx * 100} />
+              <TeamCard key={idx} member={member} />
             ))}
           </div>
         </div>
       </section>
 
       {/* Senior Consultants */}
-      <section className="py-20 px-6 md:px-12 bg-white">
+      <section className="py-20 px-6 md:px-12 bg-brand-light">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-navy mb-12 font-serif">Senior Consultants</h2>
+          <h2 className="text-4xl font-bold text-brand-dark mb-12 text-center font-serif">
+            Senior Consultants
+          </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {senior.map((member, idx) => (
-              <TeamCard key={member.id} member={member} delay={idx * 100} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Consultants */}
-      <section className="py-20 px-6 md:px-12 bg-cream">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-navy mb-12 font-serif">Consultants</h2>
-
-          <div className="grid md:grid-cols-4 gap-8">
             {consultants.map((member, idx) => (
-              <TeamCard key={member.id} member={member} delay={idx * 100} />
+              <TeamCard key={idx} member={member} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Culture */}
+      {/* Culture Section */}
       <section className="py-20 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-navy mb-12 text-center font-serif">Our Culture</h2>
+          <h2 className="text-4xl font-bold text-brand-dark mb-12 text-center font-serif">
+            Our Culture
+          </h2>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: 'Collaboration', description: 'We work together to achieve shared goals' },
-              { title: 'Growth', description: 'Continuous learning and professional development' },
-              { title: 'Excellence', description: 'Commitment to delivering outstanding results' },
-              { title: 'Integrity', description: 'Honesty and transparency in all we do' },
+              {
+                title: 'Expertise',
+                description: 'Deep industry knowledge combined with functional excellence',
+              },
+              {
+                title: 'Collaboration',
+                description: 'We work as true partners with our clients and each other',
+              },
+              {
+                title: 'Impact',
+                description: 'Focused on delivering measurable, lasting business results',
+              },
             ].map((item, idx) => (
               <div
-                key={item.title}
-                className="bg-cream rounded-xl p-6 border border-gold/10 text-center animate-fade-in-up"
-                style={{ animationDelay: `${idx * 100}ms` }}
+                key={idx}
+                className="bg-brand-light rounded-lg p-8 border border-slate-200 text-center"
               >
-                <h3 className="font-bold text-navy mb-2 font-serif">{item.title}</h3>
-                <p className="text-sm text-dark">{item.description}</p>
+                <h3 className="text-2xl font-bold text-brand-dark mb-3 font-serif">
+                  {item.title}
+                </h3>
+                <p className="text-slate-700">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 px-6 md:px-12 bg-navy">
+      {/* Join Us CTA */}
+      <section className="py-20 px-6 md:px-12 bg-brand-dark">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6 font-serif">
             Join Our Team
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             We're always looking for talented consultants to join our growing team
           </p>
-          <Link href="/contact">
-            <button className="bg-gold text-navy px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300">
-              Get in Touch
+          <a href="mailto:careers@nexuscorporate.com">
+            <button className="bg-brand-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl">
+              View Opportunities
             </button>
-          </Link>
+          </a>
         </div>
       </section>
     </main>
   );
 }
 
-function TeamCard({
-  member,
-  delay,
-}: {
-  member: TeamMember;
-  delay: number;
-}) {
+function TeamCard({ member }: { member: TeamMember }) {
   return (
-    <div
-      className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up"
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      {/* Photo Placeholder */}
-      <div className="w-full h-48 bg-cream rounded-lg mb-4 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-4xl mb-2">👤</div>
-          <p className="text-light text-xs">Photo</p>
-        </div>
+    <div className="bg-white rounded-lg overflow-hidden border border-slate-200 hover:border-brand-accent hover:shadow-lg transition-all duration-300">
+      <div className="relative h-64 overflow-hidden">
+        <Image
+          src={member.image}
+          alt={member.name}
+          fill
+          className="object-cover"
+          quality={85}
+        />
       </div>
 
-      {/* Info */}
-      <h3 className="text-lg font-bold text-navy mb-1 font-serif">{member.name}</h3>
-      <p className="text-sm text-gold font-semibold mb-3">{member.title}</p>
-      <p className="text-sm text-dark mb-4 leading-relaxed">{member.bio}</p>
+      <div className="p-8">
+        <h3 className="text-2xl font-bold text-brand-dark mb-1 font-serif">{member.name}</h3>
+        <p className="text-brand-accent font-semibold mb-4">{member.title}</p>
+        <p className="text-slate-700 mb-6 leading-relaxed">{member.bio}</p>
 
-      {/* Social Links */}
-      <div className="flex gap-3 pt-4 border-t border-gold/10">
-        {member.social.linkedin && (
-          <a
-            href={member.social.linkedin}
-            className="text-light hover:text-gold transition-colors"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={18} />
+        <div className="mb-6">
+          <p className="text-sm text-slate-600 font-semibold mb-3">Expertise</p>
+          <div className="flex flex-wrap gap-2">
+            {member.expertise.map((skill, idx) => (
+              <span
+                key={idx}
+                className="bg-brand-light text-brand-dark text-xs px-3 py-1 rounded-full"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex gap-3 pt-4 border-t border-slate-200">
+          <a href="#" className="text-slate-400 hover:text-brand-accent transition-colors">
+            <Linkedin size={20} />
           </a>
-        )}
-        {member.social.github && (
-          <a
-            href={member.social.github}
-            className="text-light hover:text-gold transition-colors"
-            aria-label="GitHub"
-          >
-            <Github size={18} />
+          <a href="#" className="text-slate-400 hover:text-brand-accent transition-colors">
+            <Mail size={20} />
           </a>
-        )}
-        {member.social.twitter && (
-          <a
-            href={member.social.twitter}
-            className="text-light hover:text-gold transition-colors"
-            aria-label="Twitter"
-          >
-            <Twitter size={18} />
-          </a>
-        )}
+        </div>
       </div>
     </div>
   );

@@ -81,7 +81,7 @@ function StatCard({ icon, value, label, delay }: { icon: React.ReactNode; value:
       className="bg-white/10 backdrop-blur-md rounded-lg p-6 shadow-lg border border-white/20 hover:border-blue-400/60 transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-scale-in"
       style={{ animationDelay: `${delay}s` }}
     >
-      <div className="text-blue-300 mb-3 transform group-hover:scale-110 transition-transform duration-300">{icon}</div>
+      <div className="text-blue-300 mb-3">{icon}</div>
       <div className="text-2xl md:text-3xl font-bold text-white mb-1 font-serif">
         {value}
       </div>

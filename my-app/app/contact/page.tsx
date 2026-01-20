@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Clock } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -20,7 +20,7 @@ export default function ContactPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setError(''); // Clear error when user starts typing
+    setError('');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,8 +40,6 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: '', email: '', company: '', service: '', budget: '', message: '' });
-        
-        // Hide success message after 5 seconds
         setTimeout(() => setSubmitted(false), 5000);
       } else {
         setError(data.error || 'An error occurred. Please try again.');
@@ -57,13 +55,13 @@ export default function ContactPage() {
   return (
     <main className="bg-white">
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 md:px-12 bg-brand-light border-b border-slate-200">
+      <section className="pt-32 pb-20 px-6 md:px-12 bg-slate-50 border-b border-slate-200 animate-fade-in">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-brand-dark mb-6 font-serif">
+            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 font-serif animate-slide-down">
               Get in Touch
             </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               Let's discuss how we can transform your enterprise
             </p>
           </div>
@@ -75,66 +73,30 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* Contact Info */}
-            <div className="md:col-span-1 space-y-8">
-              <div>
-                <div className="flex items-center gap-3 mb-3">
-                  <Mail className="text-brand-accent" size={24} />
-                  <h3 className="text-lg font-bold text-brand-dark">Email</h3>
-                </div>
-                <a
-                  href="mailto:hello@nexuscorporate.com"
-                  className="text-slate-600 hover:text-brand-accent transition-colors"
-                >
-                  hello@nexuscorporate.com
-                </a>
-              </div>
-
-              <div>
-                <div className="flex items-center gap-3 mb-3">
-                  <Phone className="text-brand-accent" size={24} />
-                  <h3 className="text-lg font-bold text-brand-dark">Phone</h3>
-                </div>
-                <a
-                  href="tel:+12125550147"
-                  className="text-slate-600 hover:text-brand-accent transition-colors"
-                >
-                  +1 (212) 555-0147
-                </a>
-              </div>
-
-              <div>
-                <div className="flex items-center gap-3 mb-3">
-                  <MapPin className="text-brand-accent" size={24} />
-                  <h3 className="text-lg font-bold text-brand-dark">Office</h3>
-                </div>
-                <p className="text-slate-600">
-                  450 Park Avenue
-                  <br />
-                  New York, NY 10022
-                  <br />
-                  USA
-                </p>
-              </div>
+            <div className="md:col-span-1 space-y-8 animate-fade-in-left">
+              <ContactCard icon={<Mail size={24} />} title="Email" content="hello@nexuscorporate.com" href="mailto:hello@nexuscorporate.com" delay={0} />
+              <ContactCard icon={<Phone size={24} />} title="Phone" content="+1 (212) 555-0147" href="tel:+12125550147" delay={0.1} />
+              <ContactCard icon={<MapPin size={24} />} title="Office" content="450 Park Avenue, New York, NY 10022, USA" delay={0.2} />
+              <ContactCard icon={<Clock size={24} />} title="Hours" content="Monday - Friday, 9:00 AM - 6:00 PM EST" delay={0.3} />
             </div>
 
             {/* Contact Form */}
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 animate-fade-in-right" style={{ animationDelay: '0.2s' }}>
               {submitted ? (
-                <div className="bg-green-50 border-2 border-green-200 rounded-lg p-8 text-center animate-fade-in">
-                  <CheckCircle className="text-green-600 mx-auto mb-4" size={48} />
-                  <h3 className="text-2xl font-bold text-green-900 mb-2">Thank You!</h3>
-                  <p className="text-green-700 mb-4">
+                <div className="bg-emerald-50 border-2 border-emerald-300 rounded-lg p-8 text-center animate-fade-in">
+                  <CheckCircle className="text-emerald-600 mx-auto mb-4" size={48} />
+                  <h3 className="text-2xl font-bold text-emerald-900 mb-2">Thank You!</h3>
+                  <p className="text-emerald-700 mb-4">
                     We've received your inquiry and will get back to you within 24 hours.
                   </p>
-                  <p className="text-sm text-green-600">
+                  <p className="text-sm text-emerald-600">
                     Check your email for confirmation.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Error Message */}
                   {error && (
-                    <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 flex items-start gap-3">
+                    <div className="bg-red-50 border-2 border-red-300 rounded-lg p-4 flex items-start gap-3 animate-shake">
                       <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={20} />
                       <div>
                         <p className="text-red-900 font-semibold">Error</p>
@@ -143,9 +105,9 @@ export default function ContactPage() {
                     </div>
                   )}
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-6 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
                     <div>
-                      <label className="block text-sm font-semibold text-brand-dark mb-2">
+                      <label className="block text-sm font-semibold text-slate-900 mb-2">
                         Name *
                       </label>
                       <input
@@ -156,12 +118,12 @@ export default function ContactPage() {
                         required
                         minLength={2}
                         maxLength={100}
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900 placeholder:text-slate-500"
                         placeholder="Your name"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-brand-dark mb-2">
+                      <label className="block text-sm font-semibold text-slate-900 mb-2">
                         Email *
                       </label>
                       <input
@@ -170,15 +132,15 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900 placeholder:text-slate-500"
                         placeholder="your@email.com"
                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-6 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
                     <div>
-                      <label className="block text-sm font-semibold text-brand-dark mb-2">
+                      <label className="block text-sm font-semibold text-slate-900 mb-2">
                         Company *
                       </label>
                       <input
@@ -189,12 +151,12 @@ export default function ContactPage() {
                         required
                         minLength={2}
                         maxLength={100}
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900 placeholder:text-slate-500"
                         placeholder="Your company"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-brand-dark mb-2">
+                      <label className="block text-sm font-semibold text-slate-900 mb-2">
                         Service of Interest *
                       </label>
                       <select
@@ -202,7 +164,7 @@ export default function ContactPage() {
                         value={formData.service}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900"
                       >
                         <option value="">Select a service</option>
                         <option value="supply-chain">Supply Chain Optimization</option>
@@ -214,15 +176,15 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold text-brand-dark mb-2">
+                  <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
                       Estimated Budget Range
                     </label>
                     <select
                       name="budget"
                       value={formData.budget}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900"
                     >
                       <option value="">Select budget range (optional)</option>
                       <option value="250k-500k">$250K - $500K</option>
@@ -232,8 +194,8 @@ export default function ContactPage() {
                     </select>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold text-brand-dark mb-2">
+                  <div className="animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
                       Tell us about your project *
                     </label>
                     <textarea
@@ -244,10 +206,10 @@ export default function ContactPage() {
                       minLength={10}
                       maxLength={5000}
                       rows={6}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all resize-none"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-slate-900 placeholder:text-slate-500 resize-none"
                       placeholder="Describe your business challenge and goals..."
                     />
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-slate-600 mt-1">
                       {formData.message.length}/5000 characters
                     </p>
                   </div>
@@ -255,10 +217,12 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-brand-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-brand-accent"
+                    className="w-full bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg animate-fade-in-up"
+                    style={{ animationDelay: '0.3s' }}
                   >
+                    <Send size={18} />
                     {loading ? (
-                      <span className="flex items-center justify-center gap-2">
+                      <span className="flex items-center gap-2">
                         <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         Sending...
                       </span>
@@ -278,9 +242,9 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 px-6 md:px-12 bg-brand-light">
+      <section className="py-20 px-6 md:px-12 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-brand-dark mb-12 text-center font-serif">
+          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center font-serif animate-slide-down">
             Frequently Asked Questions
           </h2>
 
@@ -311,8 +275,12 @@ export default function ContactPage() {
                 a: 'Yes, we specialize in integrating with existing systems and infrastructure. We assess compatibility during the initial consultation.',
               },
             ].map((item, idx) => (
-              <div key={idx} className="bg-white rounded-lg p-6 border border-slate-200 hover:border-brand-accent transition-all duration-300">
-                <h3 className="text-lg font-bold text-brand-dark mb-3">{item.q}</h3>
+              <div 
+                key={idx} 
+                className="bg-white rounded-lg p-6 border border-slate-200 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
+                style={{ animationDelay: `${idx * 0.05}s` }}
+              >
+                <h3 className="text-lg font-bold text-slate-900 mb-3">{item.q}</h3>
                 <p className="text-slate-700">{item.a}</p>
               </div>
             ))}
@@ -321,8 +289,8 @@ export default function ContactPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 md:px-12 bg-brand-dark">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="py-20 px-6 md:px-12 bg-slate-900">
+        <div className="max-w-7xl mx-auto text-center animate-fade-in-up">
           <h2 className="text-4xl font-bold text-white mb-6 font-serif">
             Ready to Get Started?
           </h2>
@@ -332,5 +300,30 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+function ContactCard({ icon, title, content, href, delay }: { icon: React.ReactNode; title: string; content: string; href?: string; delay: number }) {
+  return (
+    <div 
+      className="bg-slate-50 rounded-lg p-6 border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <div className="flex items-start gap-4">
+        <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
+          <div className="text-blue-600">{icon}</div>
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">{title}</h4>
+          {href ? (
+            <a href={href} className="text-blue-600 hover:text-blue-700 transition-colors text-sm break-all font-medium">
+              {content}
+            </a>
+          ) : (
+            <p className="text-slate-700 text-sm leading-relaxed">{content}</p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

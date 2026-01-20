@@ -37,36 +37,33 @@ const services: Service[] = [
 
 export default function Services() {
   return (
-    <section className="py-20 px-6 md:px-12 bg-white">
+    <section className="py-20 px-6 md:px-12 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-4 font-serif">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             What We Do
           </h2>
-          <p className="text-xl text-light max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             Our core expertise areas designed to drive transformation
           </p>
         </div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, idx) => (
+          {services.map((service) => (
             <Link key={service.title} href="/services">
-              <div
-                className="bg-cream rounded-xl p-8 hover:shadow-lg transition-all duration-300 cursor-pointer group border border-gold/10 hover:border-gold/30 h-full"
-                style={{ animationDelay: `${idx * 100}ms` }}
-              >
-                <div className="text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-white rounded-xl p-8 hover:shadow-lg transition-all duration-300 cursor-pointer group border border-yellow-500/10 hover:border-yellow-500/30 h-full">
+                <div className="text-yellow-500 mb-4 group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold text-navy mb-3 font-serif">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
                   {service.title}
                 </h3>
-                <p className="text-light leading-relaxed">
+                <p className="text-slate-600 leading-relaxed">
                   {service.description}
                 </p>
-                <div className="mt-4 text-gold font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                <div className="mt-4 text-yellow-500 font-semibold group-hover:translate-x-2 transition-transform duration-300">
                   Learn More →
                 </div>
               </div>

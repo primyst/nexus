@@ -9,7 +9,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-boardroom.jpg"
+          src="/hero-boardroom.webp"
           alt="Enterprise business solutions"
           fill
           className="object-cover"

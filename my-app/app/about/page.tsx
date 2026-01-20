@@ -32,19 +32,19 @@ export default function AboutPage() {
       name: 'Michael Thompson',
       title: 'Founder & CEO',
       bio: '25+ years in enterprise consulting. Former Partner at McKinsey.',
-      image: '/images/team-ceo.jpg',
+      image: '/team-ceo.jpg',
     },
     {
       name: 'Sarah Chen',
       title: 'Chief Operating Officer',
       bio: '20+ years in supply chain and operations. Led transformations at Fortune 100 companies.',
-      image: '/images/team-cto.jpg',
+      image: '/team-cto.jpg',
     },
     {
       name: 'David Martinez',
       title: 'Chief Financial Officer',
       bio: '18+ years in finance transformation. Expert in shared services and process automation.',
-      image: '/images/team-cfo.jpg',
+      image: '/team-cfo.jpg',
     },
   ];
 

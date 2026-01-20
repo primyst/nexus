@@ -8,6 +8,20 @@
   --color-dark: #1F2937;
   --color-light: #6B7280;
   --color-white: #FFFFFF;
+  
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
+@theme {
+  --color-gold: #D4AF37;
+  --color-navy: #1A2B4A;
+  --color-teal: #0D9488;
+  --color-cream: #F5F3F0;
+  --color-dark: #1F2937;
+  --color-light: #6B7280;
+  --color-white: #FFFFFF;
 }
 
 * {
@@ -21,15 +35,17 @@ html {
 }
 
 body {
-  background-color: var(--color-cream);
-  color: var(--color-dark);
-  font-family: 'Inter', system-ui, sans-serif;
+  @apply bg-cream text-dark;
+  font-family: var(--font-sans);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  color: var(--color-navy);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-serif font-bold text-navy;
 }
 
 /* Animations */
@@ -63,14 +79,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-cream);
+  @apply bg-cream;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gold);
-  border-radius: 5px;
+  @apply bg-gold rounded;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-navy);
+  @apply bg-navy;
 }

@@ -6,26 +6,26 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="relative min-h-screen w-full pt-24 pb-12 overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
+      {/* Background Image Container */}
+      <div className="absolute inset-0 z-0 w-full h-full">
+                <Image
           src="/hero-boardroom.webp"
-          alt="Enterprise business solutions"
           fill
-          className="object-cover"
+          className="object-cover w-full h-full"
           priority
           quality={85}
           sizes="100vw"
         />
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/85 via-brand-dark/75 to-brand-dark/65" />
+        
+        {/* Dark Overlay - MUST be after Image */}
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-dark/85 via-brand-dark/75 to-brand-dark/65" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Content - Must have z-10 */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 h-full">
+        <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-96px)]">
           {/* Left Content */}
-          <div className="space-y-6 animate-fade-in">
+          <div className="space-y-6">
             <div className="inline-block bg-brand-accent/20 text-brand-accent px-4 py-2 rounded-full text-sm font-semibold">
               Enterprise Solutions Provider
             </div>

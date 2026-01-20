@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Clock } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -26,7 +26,6 @@ export default function Contact() {
     setLoading(true);
     setError('');
 
-    // Client-side validation
     if (!formData.name.trim()) {
       setError('Name is required');
       setLoading(false);
@@ -87,93 +86,29 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-4 font-serif">
+          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-4 font-serif animate-slide-down">
             Get in Touch
           </h2>
-          <p className="text-xl text-light max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
             Have a project or question? Reach out and we'll get back to you promptly.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-12">
           {/* Contact Info */}
-          <div className="space-y-6 animate-fade-in-up">
-            {/* Email */}
-            <div className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <div className="bg-gold/10 p-3 rounded-lg flex-shrink-0">
-                  <Mail size={24} className="text-gold" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-navy mb-2">Email</h4>
-                  <a
-                    href="mailto:hello@nexuscorporate.com"
-                    className="text-gold hover:text-gold/80 transition-colors text-sm break-all"
-                  >
-                    hello@nexuscorporate.com
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Phone */}
-            <div className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <div className="bg-gold/10 p-3 rounded-lg flex-shrink-0">
-                  <Phone size={24} className="text-gold" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-navy mb-2">Phone</h4>
-                  <a
-                    href="tel:+12125550147"
-                    className="text-gold hover:text-gold/80 transition-colors text-sm"
-                  >
-                    +1 (212) 555-0147
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Address */}
-            <div className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <div className="bg-gold/10 p-3 rounded-lg flex-shrink-0">
-                  <MapPin size={24} className="text-gold" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-navy mb-2">Address</h4>
-                  <p className="text-dark text-sm leading-relaxed">
-                    450 Park Avenue<br />
-                    New York, NY 10022<br />
-                    USA
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Hours */}
-            <div className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-start gap-4">
-                <div className="bg-gold/10 p-3 rounded-lg flex-shrink-0">
-                  <Clock size={24} className="text-gold" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-navy mb-2">Office Hours</h4>
-                  <p className="text-dark text-sm">
-                    Monday - Friday<br />
-                    9:00 AM - 6:00 PM EST
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div className="space-y-6 animate-fade-in-left">
+            <ContactCard icon={<Mail size={24} />} title="Email" content="hello@nexuscorporate.com" href="mailto:hello@nexuscorporate.com" delay={0} />
+            <ContactCard icon={<Phone size={24} />} title="Phone" content="+1 (212) 555-0147" href="tel:+12125550147" delay={0.1} />
+            <ContactCard icon={<MapPin size={24} />} title="Address" content="450 Park Avenue, New York, NY 10022, USA" delay={0.2} />
+            <ContactCard icon={<Clock size={24} />} title="Office Hours" content="Monday - Friday, 9:00 AM - 6:00 PM EST" delay={0.3} />
           </div>
 
           {/* Contact Form */}
-          <div className="md:col-span-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <form onSubmit={handleSubmit} className="bg-white rounded-xl p-8 border border-gold/10 space-y-6">
+          <div className="md:col-span-2 animate-fade-in-right" style={{ animationDelay: '0.2s' }}>
+            <form onSubmit={handleSubmit} className="bg-white rounded-xl p-8 border border-gold/10 space-y-6 shadow-md hover:shadow-lg transition-all duration-300">
               {/* Name & Email Row */}
               <div className="grid md:grid-cols-2 gap-6">
-                <div>
+                <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
                   <label className="block text-sm font-semibold text-navy mb-2">
                     Name <span className="text-gold">*</span>
                   </label>
@@ -184,10 +119,10 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all text-dark placeholder:text-light"
+                    className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all text-slate-900 placeholder:text-slate-500"
                   />
                 </div>
-                <div>
+                <div className="animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
                   <label className="block text-sm font-semibold text-navy mb-2">
                     Email <span className="text-gold">*</span>
                   </label>
@@ -198,13 +133,13 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all text-dark placeholder:text-light"
+                    className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all text-slate-900 placeholder:text-slate-500"
                   />
                 </div>
               </div>
 
               {/* Company */}
-              <div>
+              <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <label className="block text-sm font-semibold text-navy mb-2">
                   Company Name
                 </label>
@@ -214,12 +149,12 @@ export default function Contact() {
                   placeholder="Your Company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all text-dark placeholder:text-light"
+                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all text-slate-900 placeholder:text-slate-500"
                 />
               </div>
 
               {/* Message */}
-              <div>
+              <div className="animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
                 <label className="block text-sm font-semibold text-navy mb-2">
                   Message <span className="text-gold">*</span>
                 </label>
@@ -230,16 +165,16 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all text-dark placeholder:text-light resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all text-slate-900 placeholder:text-slate-500 resize-none"
                 />
-                <p className="text-xs text-light mt-1">
+                <p className="text-xs text-slate-600 mt-1">
                   {formData.message.length} characters (minimum 10)
                 </p>
               </div>
 
               {/* Error Message */}
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2 animate-fade-in">
+                <div className="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2 animate-shake">
                   <AlertCircle size={18} />
                   {error}
                 </div>
@@ -247,7 +182,7 @@ export default function Contact() {
 
               {/* Success Message */}
               {submitted && (
-                <div className="bg-teal/10 border border-teal text-teal px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 animate-fade-in">
+                <div className="bg-teal/10 border border-teal text-teal px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 animate-pulse">
                   <CheckCircle size={18} />
                   Thank you! We'll respond within 24 hours.
                 </div>
@@ -257,14 +192,15 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={loading || submitted}
-                className="w-full bg-gold text-navy px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gold text-navy px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg animate-fade-in-up"
+                style={{ animationDelay: '0.3s' }}
               >
                 <Send size={18} />
                 {loading ? 'Sending...' : submitted ? 'Message Sent!' : 'Send Message'}
               </button>
 
               {/* Privacy Note */}
-              <p className="text-xs text-light text-center">
+              <p className="text-xs text-slate-600 text-center">
                 We respect your privacy. Your information will only be used to respond to your inquiry.
               </p>
             </form>
@@ -275,4 +211,29 @@ export default function Contact() {
   );
 }
 
-import { Clock } from 'lucide-react';
+function ContactCard({ icon, title, content, href, delay }: { icon: React.ReactNode; title: string; content: string; href?: string; delay: number }) {
+  const Component = href ? 'a' : 'div';
+  
+  return (
+    <div 
+      className="bg-white rounded-xl p-6 border border-gold/10 hover:border-gold/40 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <div className="flex items-start gap-4">
+        <div className="bg-gold/10 p-3 rounded-lg flex-shrink-0">
+          <div className="text-gold">{icon}</div>
+        </div>
+        <div>
+          <h4 className="font-bold text-navy mb-2">{title}</h4>
+          {href ? (
+            <a href={href} className="text-gold hover:text-gold/80 transition-colors text-sm break-all font-medium">
+              {content}
+            </a>
+          ) : (
+            <p className="text-slate-700 text-sm leading-relaxed">{content}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

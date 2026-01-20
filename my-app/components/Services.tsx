@@ -1,5 +1,5 @@
 'use client';
-import { Zap, BarChart3, Truck, DollarSign } from 'lucide-react';
+import { Zap, BarChart3, Truck, DollarSign, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface Service {
@@ -58,29 +58,30 @@ const services: Service[] = [
 
 export default function Services() {
   return (
-    <section className="py-20 px-6 md:px-12 bg-brand-light">
+    <section className="py-20 px-6 md:px-12 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-4 font-serif">
+        <div className="text-center mb-16 animate-fade-in-up">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif animate-slide-down">
             Our Services
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
             Comprehensive enterprise solutions tailored to your business challenges
           </p>
         </div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service) => (
+          {services.map((service, idx) => (
             <div
               key={service.title}
-              className="bg-white rounded-lg p-8 hover:shadow-xl transition-all duration-300 group border border-slate-200 hover:border-brand-accent"
+              className="bg-white rounded-lg p-8 hover:shadow-xl transition-all duration-300 group border border-slate-200 hover:border-blue-400 transform hover:scale-105 animate-fade-in-up"
+              style={{ animationDelay: `${idx * 0.1}s` }}
             >
-              <div className="text-brand-accent mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-blue-600 mb-4 group-hover:scale-110 transition-transform duration-300">
                 {service.icon}
               </div>
-              <h3 className="text-lg font-bold text-brand-dark mb-3 font-serif">
+              <h3 className="text-lg font-bold text-slate-900 mb-3 font-serif">
                 {service.title}
               </h3>
               <p className="text-slate-600 leading-relaxed mb-4">
@@ -89,14 +90,15 @@ export default function Services() {
               <ul className="space-y-2 mb-4">
                 {service.details.map((detail) => (
                   <li key={detail} className="text-sm text-slate-600 flex items-start gap-2">
-                    <span className="text-brand-accent mt-1">•</span>
+                    <span className="text-blue-600 mt-1">•</span>
                     {detail}
                   </li>
                 ))}
               </ul>
               <Link href="/services">
-                <div className="text-brand-accent font-semibold group-hover:translate-x-2 transition-transform duration-300 cursor-pointer">
-                  Learn More →
+                <div className="text-blue-600 font-semibold group-hover:translate-x-2 transition-transform duration-300 cursor-pointer flex items-center gap-1">
+                  Learn More
+                  <ArrowRight size={16} />
                 </div>
               </Link>
             </div>

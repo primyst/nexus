@@ -2,7 +2,20 @@
 import { Linkedin, Github, Twitter } from 'lucide-react';
 import Link from 'next/link';
 
-const teamMembers = [
+interface TeamMember {
+  id: number;
+  name: string;
+  title: string;
+  bio: string;
+  category: 'leadership' | 'senior' | 'consultant';
+  social: {
+    linkedin?: string;
+    github?: string;
+    twitter?: string;
+  };
+}
+
+const teamMembers: TeamMember[] = [
   {
     id: 1,
     name: 'Sarah Mitchell',
@@ -190,16 +203,13 @@ export default function TeamPage() {
   );
 }
 
-interface TeamMember {
-  id: number;
-  name: string;
-  title: string;
-  bio: string;
-  category: string;
-  social: { [key: string]: string };
-}
-
-function TeamCard({ member, delay }: { member: TeamMember; delay: number }) {
+function TeamCard({
+  member,
+  delay,
+}: {
+  member: TeamMember;
+  delay: number;
+}) {
   return (
     <div
       className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300 animate-fade-in-up"
@@ -221,17 +231,29 @@ function TeamCard({ member, delay }: { member: TeamMember; delay: number }) {
       {/* Social Links */}
       <div className="flex gap-3 pt-4 border-t border-gold/10">
         {member.social.linkedin && (
-          <a href={member.social.linkedin} className="text-light hover:text-gold transition-colors">
+          <a
+            href={member.social.linkedin}
+            className="text-light hover:text-gold transition-colors"
+            aria-label="LinkedIn"
+          >
             <Linkedin size={18} />
           </a>
         )}
         {member.social.github && (
-          <a href={member.social.github} className="text-light hover:text-gold transition-colors">
+          <a
+            href={member.social.github}
+            className="text-light hover:text-gold transition-colors"
+            aria-label="GitHub"
+          >
             <Github size={18} />
           </a>
         )}
         {member.social.twitter && (
-          <a href={member.social.twitter} className="text-light hover:text-gold transition-colors">
+          <a
+            href={member.social.twitter}
+            className="text-light hover:text-gold transition-colors"
+            aria-label="Twitter"
+          >
             <Twitter size={18} />
           </a>
         )}

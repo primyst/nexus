@@ -1,3 +1,5 @@
+'use client';
+
 interface WorkItem {
   title: string;
   description: string;
@@ -21,38 +23,29 @@ const workItems: WorkItem[] = [
     title: 'Market Expansion Strategy',
     description:
       'Consulted for a mid-size client entering two new regions simultaneously.',
-    outcome:
-      'Successful market entry within six months, achieving first-quarter targets.',
+    outcome: 'Successful market entry within six months, achieving first-quarter targets.',
   },
 ];
 
 export default function Work() {
   return (
-    <section
-      id="work"
-      className="mx-auto max-w-7xl px-6 py-20 text-white"
-    >
-      {/* Section heading */}
+    <section className="mx-auto max-w-7xl px-6 py-20 text-white">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-3xl font-semibold md:text-4xl">
-          Selected Work & Achievements
-        </h2>
-        <p className="mt-4 text-lg text-white/70">
-          We focus on delivering measurable results. Here are some examples of
-          our recent engagements.
+        <h2 className="text-3xl font-semibold md:text-4xl text-white">Selected Work & Achievements</h2>
+        <p className="mt-4 text-lg text-gray-300">
+          We focus on delivering measurable results. Here are some examples of our recent engagements.
         </p>
       </div>
 
-      {/* Work items grid */}
       <div className="mt-12 grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {workItems.map((item) => (
           <div
             key={item.title}
-            className="rounded-lg bg-white/10 p-6 backdrop-blur-md transition hover:bg-white/20"
+            className="rounded-lg bg-brand-light/20 p-6 backdrop-blur-md transition hover:bg-brand-light/40"
           >
-            <h3 className="text-xl font-semibold">{item.title}</h3>
-            <p className="mt-3 text-white/70">{item.description}</p>
-            <p className="mt-4 font-medium text-white/90">{item.outcome}</p>
+            <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+            <p className="mt-3 text-gray-300">{item.description}</p>
+            <p className="mt-4 font-medium text-white">{item.outcome}</p>
           </div>
         ))}
       </div>

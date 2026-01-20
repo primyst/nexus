@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
+import { Mail, Phone, MapPin, CheckCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -8,18 +9,16 @@ export default function ContactPage() {
     email: '',
     company: '',
     service: '',
+    budget: '',
     message: '',
   });
+
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,216 +26,246 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-      // TODO: Connect to API route
-      console.log('Form submitted:', formData);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 5000);
-      setFormData({ name: '', email: '', company: '', service: '', message: '' });
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', company: '', service: '', budget: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error submitting form:', error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className="bg-cream">
+    <main className="bg-white">
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 md:px-12 bg-white border-b border-gold/10">
+      <section className="pt-32 pb-20 px-6 md:px-12 bg-brand-light border-b border-slate-200">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center animate-fade-in-up">
-            <h1 className="text-5xl md:text-6xl font-bold text-navy mb-6 font-serif">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold text-brand-dark mb-6 font-serif">
               Get in Touch
             </h1>
-            <p className="text-xl text-light max-w-3xl mx-auto leading-relaxed">
-              Have a project or question? Reach out and we'll get back to you promptly.
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Let's discuss how we can transform your enterprise
             </p>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-6 md:px-12 bg-cream">
+      <section className="py-20 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* Contact Info */}
-            <div className="space-y-6 animate-fade-in-up">
-              <div className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="bg-gold/10 p-3 rounded-lg">
-                    <Mail size={24} className="text-gold" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy">Email</h4>
-                    <a
-                      href="mailto:hello@nexuscorporate.com"
-                      className="text-gold hover:text-gold/80 transition-colors text-sm"
-                    >
-                      hello@nexuscorporate.com
-                    </a>
-                  </div>
+            <div className="md:col-span-1 space-y-8">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <Mail className="text-brand-accent" size={24} />
+                  <h3 className="text-lg font-bold text-brand-dark">Email</h3>
                 </div>
+                <a
+                  href="mailto:hello@nexuscorporate.com"
+                  className="text-slate-600 hover:text-brand-accent transition-colors"
+                >
+                  hello@nexuscorporate.com
+                </a>
               </div>
 
-              <div className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="bg-gold/10 p-3 rounded-lg">
-                    <Phone size={24} className="text-gold" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy">Phone</h4>
-                    <a
-                      href="tel:+12125550147"
-                      className="text-gold hover:text-gold/80 transition-colors text-sm"
-                    >
-                      +1 (212) 555-0147
-                    </a>
-                  </div>
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <Phone className="text-brand-accent" size={24} />
+                  <h3 className="text-lg font-bold text-brand-dark">Phone</h3>
                 </div>
+                <a
+                  href="tel:+12125550147"
+                  className="text-slate-600 hover:text-brand-accent transition-colors"
+                >
+                  +1 (212) 555-0147
+                </a>
               </div>
 
-              <div className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-start gap-4">
-                  <div className="bg-gold/10 p-3 rounded-lg">
-                    <MapPin size={24} className="text-gold" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy mb-2">Address</h4>
-                    <p className="text-dark text-sm leading-relaxed">
-                      450 Park Avenue<br />
-                      New York, NY 10022<br />
-                      USA
-                    </p>
-                  </div>
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <MapPin className="text-brand-accent" size={24} />
+                  <h3 className="text-lg font-bold text-brand-dark">Office</h3>
                 </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 border border-gold/10 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center gap-4">
-                  <div className="bg-gold/10 p-3 rounded-lg">
-                    <Clock size={24} className="text-gold" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy mb-1">Office Hours</h4>
-                    <p className="text-dark text-sm">Mon-Fri: 9AM-6PM EST</p>
-                  </div>
-                </div>
+                <p className="text-slate-600">
+                  450 Park Avenue
+                  <br />
+                  New York, NY 10022
+                  <br />
+                  USA
+                </p>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="md:col-span-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <form onSubmit={handleSubmit} className="bg-white rounded-xl p-8 border border-gold/10 space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold transition-colors text-dark placeholder:text-light"
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold transition-colors text-dark placeholder:text-light"
-                  />
+            <div className="md:col-span-2">
+              {submitted ? (
+                <div className="bg-green-50 border-2 border-green-200 rounded-lg p-8 text-center">
+                  <CheckCircle className="text-green-600 mx-auto mb-4" size={48} />
+                  <h3 className="text-2xl font-bold text-green-900 mb-2">Thank You!</h3>
+                  <p className="text-green-700">
+                    We've received your inquiry and will get back to you within 24 hours.
+                  </p>
                 </div>
-
-                <input
-                  type="text"
-                  name="company"
-                  placeholder="Company Name"
-                  value={formData.company}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold transition-colors text-dark placeholder:text-light"
-                />
-
-                <select
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold transition-colors text-dark"
-                >
-                  <option value="">Select a Service</option>
-                  <option value="strategic">Strategic Consulting</option>
-                  <option value="digital">Digital Transformation</option>
-                  <option value="change">Change Management</option>
-                  <option value="technology">Technology Integration</option>
-                  <option value="other">Other</option>
-                </select>
-
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-gold/20 bg-cream focus:outline-none focus:border-gold transition-colors text-dark placeholder:text-light resize-none"
-                />
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-gold text-navy px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  <Send size={18} />
-                  {loading ? 'Sending...' : 'Send Message'}
-                </button>
-
-                {submitted && (
-                  <div className="bg-teal/10 border border-teal text-teal px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 animate-fade-in">
-                    <CheckCircle size={18} />
-                    Thank you! We'll respond within 24 hours.
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-brand-dark mb-2">
+                        Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                        placeholder="Your name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-brand-dark mb-2">
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                        placeholder="your@email.com"
+                      />
+                    </div>
                   </div>
-                )}
-              </form>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-brand-dark mb-2">
+                        Company *
+                      </label>
+                      <input
+                        type="text"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                        placeholder="Your company"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-brand-dark mb-2">
+                        Service of Interest *
+                      </label>
+                      <select
+                        name="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                      >
+                        <option value="">Select a service</option>
+                        <option value="supply-chain">Supply Chain Optimization</option>
+                        <option value="finance">Financial Operations</option>
+                        <option value="operations">Operational Excellence</option>
+                        <option value="digital">Digital Transformation</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-brand-dark mb-2">
+                      Estimated Budget Range
+                    </label>
+                    <select
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                    >
+                      <option value="">Select budget range</option>
+                      <option value="250k-500k">$250K - $500K</option>
+                      <option value="500k-1m">$500K - $1M</option>
+                      <option value="1m-2m">$1M - $2M</option>
+                      <option value="2m+">$2M+</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-brand-dark mb-2">
+                      Tell us about your project *
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={6}
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent resize-none"
+                      placeholder="Describe your business challenge and goals..."
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-brand-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? 'Sending...' : 'Send Inquiry'}
+                  </button>
+
+                  <p className="text-xs text-slate-600 text-center">
+                    We respect your privacy. Your information is confidential.
+                  </p>
+                </form>
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 px-6 md:px-12 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-navy mb-12 text-center font-serif">
+      <section className="py-20 px-6 md:px-12 bg-brand-light">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-brand-dark mb-12 text-center font-serif">
             Frequently Asked Questions
           </h2>
 
-          <div className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
               {
-                q: 'What is the typical project timeline?',
-                a: 'Project timelines vary based on scope and complexity. Most engagements range from 3-18 months. We provide detailed timelines during the initial consultation.',
+                q: 'What is your typical engagement timeline?',
+                a: 'Most engagements range from 3-12 months depending on scope and complexity. We discuss timeline during the initial consultation.',
               },
               {
-                q: 'How do you determine pricing?',
-                a: 'We offer flexible engagement models including fixed-price, time-and-materials, and retainer arrangements. Pricing is customized based on your specific needs and project scope.',
+                q: 'How do you structure your fees?',
+                a: 'We typically work on a project basis with fixed fees or time-and-materials arrangements. Pricing depends on scope and complexity.',
               },
               {
-                q: 'Can you work with companies of all sizes?',
-                a: 'Yes, we work with startups, mid-market companies, and Fortune 500 enterprises. Our solutions are tailored to fit organizations of any size.',
+                q: 'Do you provide ongoing support after project completion?',
+                a: 'Yes, we offer post-implementation support and optimization services to ensure sustainable results.',
               },
               {
                 q: 'What industries do you specialize in?',
-                a: 'We have deep expertise in finance, technology, healthcare, retail, and manufacturing. However, our methodologies are applicable across all industries.',
+                a: 'We have deep expertise in manufacturing, finance, healthcare, and logistics. We also work across other industries.',
               },
             ].map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-cream rounded-xl p-6 border border-gold/10 animate-fade-in-up"
-                style={{ animationDelay: `${idx * 100}ms` }}
-              >
-                <h3 className="font-bold text-navy mb-3">{item.q}</h3>
-                <p className="text-dark leading-relaxed">{item.a}</p>
+              <div key={idx} className="bg-white rounded-lg p-6 border border-slate-200">
+                <h3 className="text-lg font-bold text-brand-dark mb-3">{item.q}</h3>
+                <p className="text-slate-700">{item.a}</p>
               </div>
             ))}
           </div>
@@ -245,5 +274,3 @@ export default function ContactPage() {
     </main>
   );
 }
-
-import { Clock } from 'lucide-react';

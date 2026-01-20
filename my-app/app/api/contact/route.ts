@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, phone, company, message } = await request.json();
+    const body = await request.json();
+    const { name, email, company, service, message } = body;
 
-    // Validate inputs
+    // Validation
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Missing required fields' },
@@ -12,32 +13,33 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Here you would typically send an email or save to database
-    // For now, we'll just log it and return success
+    if (message.length < 10) {
+      return NextResponse.json(
+        { error: 'Message must be at least 10 characters' },
+        { status: 400 }
+      );
+    }
+
+    // TODO: Send email using your email service (SendGrid, Nodemailer, etc.)
     console.log('Contact form submission:', {
       name,
       email,
-      phone,
       company,
+      service,
       message,
       timestamp: new Date().toISOString(),
     });
 
-    // Example: Send email via your email service
-    // await sendEmail({
-    //   to: process.env.CONTACT_EMAIL,
-    //   subject: `New Contact from ${name}`,
-    //   html: `...`
-    // });
+    // TODO: Store in database if needed
 
     return NextResponse.json(
-      { success: true, message: 'Message received successfully' },
+      { success: true, message: 'Thank you! We\'ll respond within 24 hours.' },
       { status: 200 }
     );
   } catch (error) {
     console.error('Contact form error:', error);
     return NextResponse.json(
-      { error: 'Failed to process request' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

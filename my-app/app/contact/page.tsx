@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -14,16 +14,19 @@ export default function ContactPage() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setError(''); // Clear error when user starts typing
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
     try {
       const response = await fetch('/api/contact', {
@@ -32,13 +35,20 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: '', email: '', company: '', service: '', budget: '', message: '' });
+        
+        // Hide success message after 5 seconds
         setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(data.error || 'An error occurred. Please try again.');
       }
-    } catch (error) {
-      console.error('Error submitting form:', error);
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setError('Network error. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -110,15 +120,29 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div className="md:col-span-2">
               {submitted ? (
-                <div className="bg-green-50 border-2 border-green-200 rounded-lg p-8 text-center">
+                <div className="bg-green-50 border-2 border-green-200 rounded-lg p-8 text-center animate-fade-in">
                   <CheckCircle className="text-green-600 mx-auto mb-4" size={48} />
                   <h3 className="text-2xl font-bold text-green-900 mb-2">Thank You!</h3>
-                  <p className="text-green-700">
+                  <p className="text-green-700 mb-4">
                     We've received your inquiry and will get back to you within 24 hours.
+                  </p>
+                  <p className="text-sm text-green-600">
+                    Check your email for confirmation.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Error Message */}
+                  {error && (
+                    <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 flex items-start gap-3">
+                      <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={20} />
+                      <div>
+                        <p className="text-red-900 font-semibold">Error</p>
+                        <p className="text-red-700 text-sm">{error}</p>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-brand-dark mb-2">
@@ -130,7 +154,9 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                        minLength={2}
+                        maxLength={100}
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
                         placeholder="Your name"
                       />
                     </div>
@@ -144,7 +170,7 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
                         placeholder="your@email.com"
                       />
                     </div>
@@ -161,7 +187,9 @@ export default function ContactPage() {
                         value={formData.company}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                        minLength={2}
+                        maxLength={100}
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
                         placeholder="Your company"
                       />
                     </div>
@@ -174,7 +202,7 @@ export default function ContactPage() {
                         value={formData.service}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
                       >
                         <option value="">Select a service</option>
                         <option value="supply-chain">Supply Chain Optimization</option>
@@ -194,9 +222,9 @@ export default function ContactPage() {
                       name="budget"
                       value={formData.budget}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"
                     >
-                      <option value="">Select budget range</option>
+                      <option value="">Select budget range (optional)</option>
                       <option value="250k-500k">$250K - $500K</option>
                       <option value="500k-1m">$500K - $1M</option>
                       <option value="1m-2m">$1M - $2M</option>
@@ -213,22 +241,34 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      minLength={10}
+                      maxLength={5000}
                       rows={6}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent resize-none"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all resize-none"
                       placeholder="Describe your business challenge and goals..."
                     />
+                    <p className="text-xs text-slate-500 mt-1">
+                      {formData.message.length}/5000 characters
+                    </p>
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-brand-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-brand-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-blue transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-brand-accent"
                   >
-                    {loading ? 'Sending...' : 'Send Inquiry'}
+                    {loading ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Sending...
+                      </span>
+                    ) : (
+                      'Send Inquiry'
+                    )}
                   </button>
 
                   <p className="text-xs text-slate-600 text-center">
-                    We respect your privacy. Your information is confidential.
+                    We respect your privacy. Your information is confidential and will only be used to respond to your inquiry.
                   </p>
                 </form>
               )}
@@ -262,13 +302,33 @@ export default function ContactPage() {
                 q: 'What industries do you specialize in?',
                 a: 'We have deep expertise in manufacturing, finance, healthcare, and logistics. We also work across other industries.',
               },
+              {
+                q: 'How quickly will you respond to my inquiry?',
+                a: 'We typically respond to all inquiries within 24 hours during business days.',
+              },
+              {
+                q: 'Can you work with our existing systems?',
+                a: 'Yes, we specialize in integrating with existing systems and infrastructure. We assess compatibility during the initial consultation.',
+              },
             ].map((item, idx) => (
-              <div key={idx} className="bg-white rounded-lg p-6 border border-slate-200">
+              <div key={idx} className="bg-white rounded-lg p-6 border border-slate-200 hover:border-brand-accent transition-all duration-300">
                 <h3 className="text-lg font-bold text-brand-dark mb-3">{item.q}</h3>
                 <p className="text-slate-700">{item.a}</p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 px-6 md:px-12 bg-brand-dark">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-white mb-6 font-serif">
+            Ready to Get Started?
+          </h2>
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+            Fill out the form above and let's schedule a consultation
+          </p>
         </div>
       </section>
     </main>

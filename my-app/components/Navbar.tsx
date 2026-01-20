@@ -11,6 +11,7 @@ export default function Navbar() {
 
       {/* Desktop links */}
       <div className="hidden md:flex gap-8 text-white">
+        <Link href="/">Home</Link>
         <Link href="/services">Services</Link>
         <Link href="/work">Work</Link>
         <Link href="/about">About</Link>

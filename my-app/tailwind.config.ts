@@ -7,14 +7,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        'brand-blue': '#0F3B66',
-        'brand-accent': '#E8A500',
-        'brand-light': '#F8FAFB',
-        'brand-dark': '#1A1F2E',
-      },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
         serif: ['Playfair Display', 'serif'],
       },
     },

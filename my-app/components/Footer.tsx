@@ -1,32 +1,32 @@
 'use client';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Twitter } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-white py-16">
+    <footer className="bg-brand-dark text-white py-16">
       <div className="max-w-7xl mx-auto px-6">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold text-yellow-500 mb-4">Nexus</h3>
+            <h3 className="text-2xl font-bold text-brand-accent mb-4 font-serif">Nexus</h3>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Strategic consulting and digital transformation for forward-thinking enterprises.
+              Enterprise transformation partner for Fortune 500 companies and leading mid-market enterprises.
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="text-yellow-500 font-semibold mb-4">Navigation</h4>
+            <h4 className="text-brand-accent font-semibold mb-4">Navigation</h4>
             <ul className="space-y-2">
               {['Home', 'About', 'Services', 'Work', 'Team', 'Contact'].map((item) => (
                 <li key={item}>
                   <Link
                     href={`/${item.toLowerCase()}`}
-                    className="text-slate-400 hover:text-yellow-500 transition-colors duration-300 text-sm"
+                    className="text-slate-400 hover:text-brand-accent transition-colors duration-300 text-sm"
                   >
                     {item}
                   </Link>
@@ -37,13 +37,13 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-yellow-500 font-semibold mb-4">Contact</h4>
+            <h4 className="text-brand-accent font-semibold mb-4">Contact</h4>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2 text-slate-400 hover:text-yellow-500 transition-colors">
+              <li className="flex items-center gap-2 text-slate-400 hover:text-brand-accent transition-colors">
                 <Mail size={16} />
                 <a href="mailto:hello@nexuscorporate.com">hello@nexuscorporate.com</a>
               </li>
-              <li className="flex items-center gap-2 text-slate-400 hover:text-yellow-500 transition-colors">
+              <li className="flex items-center gap-2 text-slate-400 hover:text-brand-accent transition-colors">
                 <Phone size={16} />
                 <a href="tel:+12125550147">+1 (212) 555-0147</a>
               </li>
@@ -56,16 +56,13 @@ export default function Footer() {
 
           {/* Social */}
           <div>
-            <h4 className="text-yellow-500 font-semibold mb-4">Follow Us</h4>
+            <h4 className="text-brand-accent font-semibold mb-4">Follow Us</h4>
             <div className="flex gap-4">
-              <a href="#" className="text-slate-400 hover:text-yellow-500 transition-colors">
+              <a href="#" className="text-slate-400 hover:text-brand-accent transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="text-slate-400 hover:text-yellow-500 transition-colors">
+              <a href="#" className="text-slate-400 hover:text-brand-accent transition-colors">
                 <Twitter size={20} />
-              </a>
-              <a href="#" className="text-slate-400 hover:text-yellow-500 transition-colors">
-                <Facebook size={20} />
               </a>
             </div>
           </div>
